@@ -113,7 +113,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       });
     }
     tabStats.set(tabId, stats);
-    updateIcon(tabId, stats);
+
+    // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
+    // If we render the icon, it will be empty. The if-guard has the
+    // effect that in most cases, you will see Ghosty as the icon.
+    // For the moment, that looks better then an empty icon. :-)
+    if (stats.trackers.length > 0) {
+      updateIcon(tabId, stats);
+    }
     return;
   }
 
