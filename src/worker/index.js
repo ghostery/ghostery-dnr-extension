@@ -4,6 +4,7 @@ try {
   // (see ../xcode/Shared (Extension)/specific/manifest.json)
   importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
+  importScripts('../common/lodash-debounce.js');
   importScripts('./adblocker.js');
   importScripts('./storage.js');
   importScripts('./tab-stats.js');
@@ -27,6 +28,29 @@ function getTrackerFromUrl(url) {
   } catch (e) {
     return null;
   }
+}
+
+// Refreshing the tracker wheel:
+// * Immediately draw it when the first data comes in
+// * After that, switch to debounced mode
+let updateIcon = updateIconNow;
+
+function updateIconNow(tabId, stats) {
+  console.log('called');
+  (chrome.browserAction || chrome.action).setIcon({
+    tabId,
+    imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
+  });
+  resetUpdateIcon();
+}
+
+function resetUpdateIcon() {
+  // effect: refresh 250ms after the last event, but force a refresh every second
+  updateIcon = _.debounce((...args) => {
+    updateIconNow(...args);
+  }, 250, {
+    maxWait: 1000,
+  });
 }
 
 chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
@@ -62,8 +86,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const tabId = sender.tab.id;
 
   if (msg.action === "updateTabStats") {
-    let stats = tabStats.get(tabId);
-    const urls = msg.args[0].urls
+    const stats = tabStats.get(tabId);
+    const urls = msg.args[0].urls;
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
     }
@@ -76,12 +100,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       });
     }
     tabStats.set(tabId, stats);
-
-    (chrome.browserAction || chrome.action).setIcon({
-      tabId,
-      imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
-    });
-
+    updateIcon(tabId, stats);
     return;
   }
 
