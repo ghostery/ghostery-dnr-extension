@@ -33,18 +33,30 @@ function getTrackerFromUrl(url) {
 // Refreshing the tracker wheel:
 // * Immediately draw it when the first data comes in
 // * After that, switch to debounced mode
+//
+// "immediate mode" will also be reentered after navigation events.
 let updateIcon = updateIconNow;
 
 function updateIconNow(tabId, stats) {
-  console.log('called');
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
     imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
   });
-  resetUpdateIcon();
+  resetUpdateIconDebounceMode();
 }
 
-function resetUpdateIcon() {
+function resetUpdateIconImmediateMode() {
+  if (updateIcon && updateIcon.cancel) {
+    updateIcon.cancel();
+  }
+  updateIcon = updateIconNow;
+}
+
+function resetUpdateIconDebounceMode() {
+  if (updateIcon && updateIcon.cancel) {
+    updateIcon.cancel();
+  }
+
   // effect: refresh 250ms after the last event, but force a refresh every second
   updateIcon = _.debounce((...args) => {
     updateIconNow(...args);
@@ -59,6 +71,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
   }
   const { domain } = tldts.parse(url);
   tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  resetUpdateIconImmediateMode();
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
