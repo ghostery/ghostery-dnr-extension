@@ -7,6 +7,8 @@ src/rule_resources/*
 !src/rule_resources/.gitkeep
 src/adblocker_engines/*
 !src/adblocker_engines/.gitkeep
+bundles/*
+!bundles/.gitkeep
 *.xcuserstate
 xcuserdata
 web-ext-artifacts/
