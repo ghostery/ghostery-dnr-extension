@@ -38,7 +38,7 @@ function degToRad(degree) {
 }
 
 function draw(ctx, categories) {
-  const sortedCategoties = categories.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b))
+  const sortedCategories = categories.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
   const { canvas } = ctx;
   const { width } = canvas;
   const center = width / 2;
@@ -48,7 +48,7 @@ function draw(ctx, categories) {
   const radius = width / 2 - ctx.lineWidth;
 
   let position = -90;
-  sortedCategoties.forEach(category => {
+  sortedCategories.forEach(category => {
       const newPosition = position + increment;
       const color = CATEGORY_COLORS[category];
       ctx.strokeStyle = color;
@@ -58,7 +58,7 @@ function draw(ctx, categories) {
         center,
         radius,
         degToRad(position),
-        degToRad(newPosition),
+        Math.min(degToRad(newPosition + 1), 2 * Math.PI),
       );
       ctx.stroke();
       position = newPosition;
