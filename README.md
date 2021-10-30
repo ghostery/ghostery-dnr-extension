@@ -1,3 +1,5 @@
+# Ghostery DNR Extension
+
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data.
 
 This repository contains a version built with the new `chrome.declarativeNetRequest` API allowing it to be used in Safari. For non-Safari browsers like Chrome, Firefox, Opera and Edge, we recommended to use instead the "classic" [Ghostery browser extension](https://github.com/ghostery/ghostery-extension/), which is built on the older, but more capable webRequest API.
