@@ -40,6 +40,13 @@
 				"vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
 				"content_scripts/cosmetics.js"
 			]
+		},
+		{
+			"matches": ["*://www.google.com/*", "*://google.com/*"],
+			"run_at": "document_start",
+			"js": [
+				"content_scripts/serp-protections/serp-privacy-stats.js"
+			]
 		}
 	],
 	"permissions": [
@@ -60,10 +67,12 @@
 		"scripts": [
 			"vendor/tldts/index.umd.min.js",
 			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
+			"worker/wtm-privacy-score.js",
 			"common/lodash-debounce.js",
 			"worker/adblocker.js",
 			"worker/storage.js",
 			"worker/tab-stats.js",
+			"worker/serp-protections.js",
 			"common/tracker-wheel.js",
 			"worker/index.js"
 		],
