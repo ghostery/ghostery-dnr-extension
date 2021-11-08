@@ -40,6 +40,20 @@
 				"vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
 				"content_scripts/cosmetics.js"
 			]
+		},
+		{
+			"matches": ["*://www.google.com/*", "*://google.com/*"],
+			"run_at": "document_start",
+			"js": [
+				"content_scripts/serp-protections/serp-privacy-stats.js"
+			]
+		},
+		{
+			"matches": ["*://www.google.com/*", "*://google.com/*"],
+			"run_at": "document_start",
+			"js": [
+				"content_scripts/serp-protections/serp-anti-clicktracking.js"
+			]
 		}
 	],
 	"permissions": [
