@@ -18,20 +18,18 @@ function renderWheel(domElem, wtmStats) {
   */
 }
 
-window.addEventListener('load', () => {
-  const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a')];
-  const links = elements.map(x => x.href);
+const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a')];
+const links = elements.map(x => x.href);
 
-  chrome.runtime.sendMessage({ action: 'queryWTMStats', links }, (response) => {
-    if (chrome.runtime.lastError) {
-      console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
-      return;
+chrome.runtime.sendMessage({ action: 'queryWTMStats', links }, (response) => {
+  if (chrome.runtime.lastError) {
+    console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
+    return;
+  }
+
+  elements.forEach((elem, i) => {
+    if (response.wtmStats[i]) {
+      renderWheel(elem, response.wtmStats[i]);
     }
-
-    elements.forEach((elem, i) => {
-      if (response.wtmStats[i]) {
-        renderWheel(elem, response.wtmStats[i]);
-      }
-    });
   });
 });
