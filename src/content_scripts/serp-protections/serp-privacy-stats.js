@@ -9,13 +9,37 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-function renderWheel(domElem, wtmStats) {
-  // TODO: UI
-  /*
-  const span = document.createElement('span');
-  span.appendChild(document.createTextNode(`<renderHook(${JSON.stringify(wtmStats)})>`));
-  domElem.appendChild(span);
-  */
+function renderWheel(anchor, wtmStats) {
+  const stats = Object.keys(wtmStats).reduce((all, current) => ([
+    ...all,
+    ...Array(wtmStats[current]).fill(current),
+  ]), []);
+  const parent = anchor.parentElement;
+  parent.style.position = 'relative';
+  const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup]');
+
+
+  const container = document.createElement('div');
+  container.classList.add('wtm-tracker-wheel-container');
+  container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 'px';
+  container.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    return false;
+  });
+
+  const label = document.createElement('label');
+  label.innerText = stats.length;
+
+  const canvas = document.createElement('canvas');
+  canvas.classList.add('wtm-tracker-wheel');
+  canvas.setAttribute('width', '22px');
+  canvas.setAttribute('height', '22px');
+  const ctx = canvas.getContext('2d');
+  WTMTrackerWheel.draw(ctx, stats);
+
+  container.appendChild(canvas);
+  container.appendChild(label);
+  parent.appendChild(container);
 }
 
 const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a')];

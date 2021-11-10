@@ -1,0 +1,23 @@
+.wtm-tracker-wheel-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wtm-tracker-wheel-container label {
+  margin-left: 3px;
+  font-size: 11.5px;
+  line-height: 11.5px;
+  font-weight: 500;
+  position: relative;
+  top: 1px;
+  cursor: pointer;
+}
+
+.wtm-tracker-wheel {
+
+}

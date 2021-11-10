@@ -239,7 +239,11 @@
         "*://*.google.ng/*"
       ],
       "run_at": "document_end",
+      "css": [
+        "content_scripts/serp-protections/wtm-popup.css"
+      ],
       "js": [
+        "common/wtm-tracker-wheel.js",
         "content_scripts/serp-protections/serp-privacy-stats.js"
       ]
     }
@@ -268,7 +272,7 @@
       "worker/storage.js",
       "worker/tab-stats.js",
       "worker/serp-protections.js",
-      "common/tracker-wheel.js",
+      "common/wtm-tracker-wheel.js",
       "worker/index.js"
     ],
     "persistent": false
@@ -293,5 +297,6 @@
     ]
   },
   "content_security_policy" : {},
-  "web_accessible_resources": []
+  "web_accessible_resources": [
+  ]
 }

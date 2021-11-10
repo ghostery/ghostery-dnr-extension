@@ -29,7 +29,7 @@ define({
         ? stats.trackers.map(t => t.category)
         : ['unknown']
       : ['unknown'];
-    draw(context, categories);
+    WTMTrackerWheel.draw(context, categories);
 
     // return element
     return el;

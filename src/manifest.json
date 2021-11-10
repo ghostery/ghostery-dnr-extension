@@ -239,7 +239,11 @@
         "*://*.google.ng/*"
       ],
       "run_at": "document_end",
+      "css": [
+        "content_scripts/serp-protections/wtm-popup.css"
+      ],
       "js": [
+        "common/wtm-tracker-wheel.js",
         "content_scripts/serp-protections/serp-privacy-stats.js"
       ]
     }
@@ -283,5 +287,6 @@
     ]
   },
   "content_security_policy" : {},
-  "web_accessible_resources": []
+  "web_accessible_resources": [
+  ]
 }
