@@ -10,4 +10,5 @@
  */
 
 import "../ui/components/category-bullet.js";
+import '../ui/components/panel-header.js';
 import "./components/wtm-report.js";

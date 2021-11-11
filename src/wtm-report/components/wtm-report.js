@@ -36,55 +36,78 @@ define({
     return html.resolve(Stats.then(stats => stats.domain));
   },
   render: () => html`
-    <header>
-      <a
-        target="_blank"
-        href="https://www.ghostery.com"
-      >
-        <img src="/images/logo.svg" />
-      </a>
-      <span class="domain-name">
-        ${html.resolve(Stats.then(stats => stats.domain))}
-      </span>
-      <button class="svg-button" onclick="${requestClose}">
-        ${close}
-      </button>
-    </header>
+    ${html.resolve(Stats.then(stats => html`
+      <panel-header domain=${stats.domain}>
+        <button class="svg-button" onclick="${requestClose}">
+          ${close}
+        </button>
+      </panel-header>
+    `))}
 
     <main>
-    ${html.resolve(Stats.then(stats => html`
-      <wtm-stats categories=${stats.stats}></wtm-stats>
-    `))}
+      <h1>${t('android_site_blocking_header')}</h1>
+
+      ${html.resolve(Stats.then(stats => html`
+        <wtm-stats categories=${stats.stats}></wtm-stats>
+      `))}
+
+      <section class="buttons">
+        ${html.resolve(Stats.then(stats => html`
+          <a
+            target="_blank"
+            href="https://whotracks.me/websites/${stats.domain}.html"
+          >
+            ${t('statistical_report')} ${externalLink}
+          </a>
+        `))}
+      </section>
     </main>
 
-    <section class="buttons">
-      ${html.resolve(Stats.then(stats => html`
-      <a
-        target="_blank"
-        href="https://whotracks.me/websites/${stats.domain}.html"
-      >
-        ${t('statistical_report')} ${externalLink}
-      </a>
-      `))}
-    </section>
+
   `.css`
     :host {
       height: 100%;
-      background-color: #F8F8F8;
       display: block;
       margin: 0 auto;
+      background-color: #F8F8F8;
     }
-    header {
-      background: var(--ghostery);
-      color: white;
-      padding: 10px 0px;
+
+    panel-header {
+      position: fixed;
+      top: 0px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    main {
+      padding: 50px 12px 12px 12px;
+      background-color: #F8F8F8;
+    }
+
+    h1 {
+      font-size: 20px;
+      text-align: center;
+      color: var(--black);
+      white-space: nowrap;
+      font-weight: 600;
+      margin: 0px;
     }
 
     .svg-button {
+      padding: 0;
       color: white;
       background: none;
       border: 0;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-button svg {
+      height: 16px;
+      width: 16px;
     }
 
     .buttons {
@@ -109,6 +132,12 @@ define({
       align-items: center;
       justify-content: center;
       white-space: nowrap;
+    }
+
+    .buttons a svg {
+      width: 10px;
+      height: 10px;
+      margin-left: 3px;
     }
   `,
 });

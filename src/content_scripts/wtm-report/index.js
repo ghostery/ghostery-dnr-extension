@@ -9,8 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
+
 function closePopups() {
-  [...document.querySelectorAll('.wtm-popup-iframe')].forEach(popup => {
+  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
     popup.parentElement.removeChild(popup);
   });
 }
@@ -18,21 +20,37 @@ function closePopups() {
 function renderPopup(container, stats) {
   closePopups()
 
+  const wrapper = document.createElement('div');
+  wrapper.classList.add(WRAPPER_CLASS);
+  wrapper.style.left = container.getBoundingClientRect().width + 15 + 'px';
+
   const iframe = document.createElement('iframe');
-  iframe.classList.add('wtm-popup-iframe');
   iframe.setAttribute('src', chrome.runtime.getURL(`wtm-report/index.html?domain=${stats.domain}`));
 
-  container.appendChild(iframe);
+  wrapper.appendChild(iframe);
+  container.appendChild(wrapper);
 }
 
 function renderWheel(anchor, stats) {
+  const count = stats.stats.length;
+
+  if (count === 0) {
+    return;
+  }
+
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
-  const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup]');
+  const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
 
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
-  container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 'px';
+  if (window.navigator.userAgent.match(/iPhone/i)) {
+    container.style.left = threeDotsElement.getBoundingClientRect().left - parent.getBoundingClientRect().left - 50 + 'px';
+  } else {
+    container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 5 + 'px';
+  }
+  // container.style.top = threeDotsElement.getBoundingClientRect().top - parent.getBoundingClientRect().top + 7 + 'px';
+
   container.addEventListener('click', (ev) => {
     renderPopup(container, stats);
     ev.preventDefault();
@@ -40,7 +58,7 @@ function renderWheel(anchor, stats) {
   });
 
   const label = document.createElement('label');
-  label.innerText = stats.stats.length;
+  label.innerText = count;
 
   const canvas = document.createElement('canvas');
   canvas.classList.add('wtm-tracker-wheel');
@@ -54,7 +72,7 @@ function renderWheel(anchor, stats) {
   parent.appendChild(container);
 }
 
-const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a')];
+const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a, div.mnr-c.xpd.O9g5cc.uUPGi a')];
 const links = elements.map(x => x.href);
 
 chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
@@ -71,7 +89,7 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
 });
 
 window.addEventListener('message', (message) => {
-  if (message.origin + '/' !== chrome.runtime.getURL('/')) {
+  if (message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase()) {
     return;
   }
 

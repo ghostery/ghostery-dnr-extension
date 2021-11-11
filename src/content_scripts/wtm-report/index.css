@@ -18,12 +18,31 @@
   cursor: pointer;
 }
 
-.wtm-popup-iframe {
+.wtm-popup-iframe-wrapper {
   position: absolute;
-  top: 15px;
+  top: -10px;
   width: 350px;
-  height: 350px;
+  height: 310px;
   z-index: 1000;
+  box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.15);
+  border-radius: 7.4px;
+}
+
+.wtm-popup-iframe-wrapper iframe {
   border: 0px;
-  border-radius: 7px;
+  height: 100%;
+  width: 100%;
+  border-radius: 7.4px;
+}
+
+.wtm-popup-iframe-wrapper::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 13px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #00AEF0;
+  transform: rotate(45deg);
 }

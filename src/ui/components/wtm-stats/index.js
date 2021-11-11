@@ -34,11 +34,13 @@ define({
         </li>
       `)}
     </ul>
+
   `.css`
     :host {
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 10px;
+      padding: 10px 0px;
     }
 
     ul {
@@ -47,7 +49,6 @@ define({
       justify-content: center;
       margin: 0;
       padding: 0;
-      height: 100%;
       list-style-type: none;
       list-style: none none inside;
     }

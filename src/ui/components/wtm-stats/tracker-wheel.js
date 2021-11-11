@@ -34,6 +34,7 @@ define({
     <strong>${categories.length}</strong>
   `.css`
     :host {
+      align-self: center;
       position: relative;
       display: flex;
       width: ${SIZE}px;
