@@ -25,10 +25,15 @@ const WTM_PRIVACY_SCORE_CATEGORIES = ["advertising","audio_video_player","cdn","
  *
  * The shipped database covers the top 10,000 sites.
  */
-function lookupWtmPrivacyScoreForSite(site) {
-  const data = WTM_PRIVACY_SCORE_COMPRESSED_STATS[site];
+function lookupWtmPrivacyScoreForSite(domain) {
+  const response = {
+    domain,
+    stats: [],
+  };
+  const data = WTM_PRIVACY_SCORE_COMPRESSED_STATS[domain];
+
   if (!data) {
-    return null;
+    return response;
   }
 
   const results = {};
@@ -37,5 +42,28 @@ function lookupWtmPrivacyScoreForSite(site) {
       results[c] = data[i];
     }
   });
-  return results;
+
+  response.stats = Object.keys(results).reduce((all, current) => ([
+    ...all,
+    ...Array(results[current]).fill(current),
+  ]), []);
+
+  return response;
+}
+
+function getWTMReportFromUrl(url) {
+  const { domain } = tldts.parse(url);
+  return lookupWtmPrivacyScoreForSite(domain);
+}
+
+function tryWTMReportOnMessageHandler(msg, sender, sendResponse) {
+  if (msg.action === 'getWTMReport') {
+    const wtmStats = msg.links.map(getWTMReportFromUrl);
+    sendResponse({
+      wtmStats,
+    });
+    return true; // done
+  }
+
+  return false; // continue
 }

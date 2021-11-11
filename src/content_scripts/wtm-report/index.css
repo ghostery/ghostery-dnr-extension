@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
-.wtm-tracker-wheel {
-
+.wtm-popup-iframe {
+  position: absolute;
+  top: 15px;
+  width: 350px;
+  height: 200px;
+  z-index: 1000;
+  border: 0px;
 }

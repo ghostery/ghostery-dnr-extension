@@ -15,12 +15,11 @@ try {
   // (see ../xcode/Shared (Extension)/specific/manifest.json)
   importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
-  importScripts('./wtm-privacy-score.js'); // export `lookupWtmPrivacyScoreForSite`
   importScripts('../common/lodash-debounce.js');
   importScripts('./adblocker.js');
   importScripts('./storage.js');
   importScripts('./tab-stats.js');
-  importScripts('./serp-protections.js');
+  importScripts('./wtm-report.js');
   importScripts('../common/wtm-tracker-wheel.js');
 } catch (e) {
   // on Safari those have to be imported from manifest.json
@@ -155,7 +154,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (trySerpProtectionsOnMessageHandler(msg, sender, sendResponse)) {
+  if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
     return false;
   }
 

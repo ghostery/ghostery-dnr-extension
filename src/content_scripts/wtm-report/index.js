@@ -9,20 +9,32 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-function renderWheel(anchor, wtmStats) {
-  const stats = Object.keys(wtmStats).reduce((all, current) => ([
-    ...all,
-    ...Array(wtmStats[current]).fill(current),
-  ]), []);
+function closePopups() {
+  [...document.querySelectorAll('.wtm-popup-iframe')].forEach(popup => {
+    popup.parentElement.removeChild(popup);
+  });
+}
+
+function renderPopup(container, stats) {
+  closePopups()
+
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('wtm-popup-iframe');
+  iframe.setAttribute('src', chrome.runtime.getURL('wtm-report/index.html'));
+
+  container.appendChild(iframe);
+}
+
+function renderWheel(anchor, stats) {
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
   const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup]');
-
 
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 'px';
   container.addEventListener('click', (ev) => {
+    renderPopup(container, stats);
     ev.preventDefault();
     return false;
   });
@@ -45,7 +57,7 @@ function renderWheel(anchor, wtmStats) {
 const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a')];
 const links = elements.map(x => x.href);
 
-chrome.runtime.sendMessage({ action: 'queryWTMStats', links }, (response) => {
+chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
   if (chrome.runtime.lastError) {
     console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
     return;
@@ -53,7 +65,7 @@ chrome.runtime.sendMessage({ action: 'queryWTMStats', links }, (response) => {
 
   elements.forEach((elem, i) => {
     if (response.wtmStats[i]) {
-      renderWheel(elem, response.wtmStats[i]);
+      renderWheel(elem, response.wtmStats[i].stats);
     }
   });
 });
