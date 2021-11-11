@@ -22,7 +22,8 @@
   position: absolute;
   top: 15px;
   width: 350px;
-  height: 200px;
+  height: 350px;
   z-index: 1000;
   border: 0px;
+  border-radius: 7px;
 }

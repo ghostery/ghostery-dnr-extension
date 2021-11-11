@@ -9,4 +9,5 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
- import "./components/wtm-report.js";
+import "../ui/components/category-bullet.js";
+import "./components/wtm-report.js";

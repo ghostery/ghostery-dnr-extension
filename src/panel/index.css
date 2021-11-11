@@ -126,43 +126,6 @@ panel-body section.buttons a svg {
   margin-left: 3px;
 }
 
-panel-body section.stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-}
-
-panel-body section.stats ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  list-style-type: none;
-  list-style: none none inside;
-}
-
-panel-body section.stats .category {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-panel-body section.stats .category label {
-  margin: 0 5px;
-  font-size: 13px;
-  line-height: 16px;
-}
-
-panel-body section.stats .category strong {
-  color: var(--black);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 16px;
-}
-
 /* FOOTER */
 
 panel-footer footer {

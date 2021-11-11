@@ -20,7 +20,7 @@ function renderPopup(container, stats) {
 
   const iframe = document.createElement('iframe');
   iframe.classList.add('wtm-popup-iframe');
-  iframe.setAttribute('src', chrome.runtime.getURL('wtm-report/index.html'));
+  iframe.setAttribute('src', chrome.runtime.getURL(`wtm-report/index.html?domain=${stats.domain}`));
 
   container.appendChild(iframe);
 }
@@ -68,4 +68,15 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
       renderWheel(elem, response.wtmStats[i].stats);
     }
   });
+});
+
+window.addEventListener('message', (message) => {
+  if (message.origin + '/' !== chrome.runtime.getURL('/')) {
+    return;
+  }
+
+  if (message.data === 'WTMReportClosePopups') {
+    closePopups();
+    return;
+  }
 });

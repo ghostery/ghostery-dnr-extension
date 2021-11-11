@@ -9,14 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store, dispatch } from '/hybrids.js';
+import { html, define } from '/hybrids.js';
 
 const SIZE = 150;
 
 define({
   tag: "tracker-wheel",
-  stats: null,
-  canvas: ({ stats }) => {
+  categories: [],
+  canvas: ({ categories }) => {
     const el = document.createElement("canvas");
     el.setAttribute('height', SIZE);
     el.setAttribute('width', SIZE);
@@ -24,19 +24,14 @@ define({
     const context = el.getContext('2d');
     context.imageSmoothingQuality = 'high';
 
-    const categories = store.ready(stats)
-      ? stats.trackers.length > 0
-        ? stats.trackers.map(t => t.category)
-        : ['unknown']
-      : ['unknown'];
-    WTMTrackerWheel.draw(context, categories);
+    WTMTrackerWheel.draw(context, categories.length === 0 ? ['unknown'] : categories);
 
     // return element
     return el;
   },
-  render: ({ stats, canvas }) => html`
+  render: ({ categories, canvas }) => html`
     ${canvas}
-    <strong>${store.ready(stats) ? stats.trackers.length : 0}</strong>
+    <strong>${categories.length}</strong>
   `.css`
     :host {
       position: relative;

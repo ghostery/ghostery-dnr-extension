@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './components/category-bullet.js';
+import '../ui/components/category-bullet.js';
 import './components/simple-view.js';
 import './components/detailed-view.js';
 import './components/panel-header.js';
