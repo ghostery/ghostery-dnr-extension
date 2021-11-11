@@ -40,14 +40,14 @@ function renderWheel(anchor, stats) {
   });
 
   const label = document.createElement('label');
-  label.innerText = stats.length;
+  label.innerText = stats.stats.length;
 
   const canvas = document.createElement('canvas');
   canvas.classList.add('wtm-tracker-wheel');
   canvas.setAttribute('width', '22px');
   canvas.setAttribute('height', '22px');
   const ctx = canvas.getContext('2d');
-  WTMTrackerWheel.draw(ctx, stats);
+  WTMTrackerWheel.draw(ctx, stats.stats);
 
   container.appendChild(canvas);
   container.appendChild(label);
@@ -65,7 +65,7 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
 
   elements.forEach((elem, i) => {
     if (response.wtmStats[i]) {
-      renderWheel(elem, response.wtmStats[i].stats);
+      renderWheel(elem, response.wtmStats[i]);
     }
   });
 });
