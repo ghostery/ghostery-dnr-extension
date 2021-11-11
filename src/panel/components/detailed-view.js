@@ -13,7 +13,7 @@ import { html, define, dispatch, store } from '/hybrids.js';
 import './detailed-view/category-with-trackers.js';
 import { sortCategories } from '../../common/categories.js';
 import { t } from '../../common/i18n.js';
-import { chevronLeft } from './icons.js';
+import { chevronLeft } from '../../ui/icons.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');

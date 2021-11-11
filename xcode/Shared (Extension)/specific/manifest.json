@@ -240,11 +240,11 @@
       ],
       "run_at": "document_end",
       "css": [
-        "content_scripts/serp-protections/wtm-popup.css"
+        "content_scripts/wtm-report/index.css"
       ],
       "js": [
         "common/wtm-tracker-wheel.js",
-        "content_scripts/serp-protections/serp-privacy-stats.js"
+        "content_scripts/wtm-report/index.js"
       ]
     }
   ],
@@ -266,12 +266,11 @@
     "scripts": [
       "vendor/tldts/index.umd.min.js",
       "vendor/@cliqz/adblocker/adblocker.umd.min.js",
-      "worker/wtm-privacy-score.js",
       "common/lodash-debounce.js",
       "worker/adblocker.js",
       "worker/storage.js",
       "worker/tab-stats.js",
-      "worker/serp-protections.js",
+      "worker/wtm-report.js",
       "common/wtm-tracker-wheel.js",
       "worker/index.js"
     ],
@@ -298,5 +297,6 @@
   },
   "content_security_policy" : {},
   "web_accessible_resources": [
+    "wtm-report/index.html"
   ]
 }

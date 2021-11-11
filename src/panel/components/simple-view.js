@@ -15,7 +15,7 @@ import "./simple-view/toggle-switch.js";
 import "./simple-view/page-load.js";
 import { toggles } from '../../common/rulesets.js';
 import { t } from '../../common/i18n.js';
-import { externalLink, chevronRight } from './icons.js';
+import { externalLink, chevronRight } from '../../ui/icons.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');

@@ -12,7 +12,7 @@
 import { html, define } from '/hybrids.js';
 import { getCategoryName } from '../../../common/categories.js';
 import { t } from '../../../common/i18n.js';
-import { chavronDown, externalLink } from '../icons.js';
+import { chavronDown, externalLink } from '../../../ui/icons.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
