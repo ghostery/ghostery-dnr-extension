@@ -17,16 +17,30 @@ class WTMTrackerWheel {
     this.CATEGORY_ORDER.forEach(c => groupedCategories[c] = 0);
     categories.forEach(c => groupedCategories[c] += 1);
 
-    if (typeof window !== "undefined") {
-      this._setupCtx(ctx, size);
-    }
-
     const center = size / 2;
     const increment = 360 / categories.length;
 
-    ctx.lineWidth = size * 0.14;
+    /* Background START */
+    // This special blue background is requried for Destkop Safari to render the colors property
+    // We've tried: white, black, red and transparent - non of those works
+    // Line width has to be a little bit smaller than the final arc so it blue wont be visible on dithered edges.
+    // Line width cannot be too small as otherwise Safari will render the colors incorrectly.
+    // Number below were chosen by trial end error.
+    ctx.lineWidth = Math.floor(size * 0.14) * 0.95;
     const radius = size / 2 - ctx.lineWidth;
+    ctx.strokeStyle = 'blue';
+    ctx.beginPath();
+    ctx.arc(
+      center,
+      center,
+      Math.floor(radius),
+      0,
+      2 * Math.PI
+    );
+    ctx.stroke();
+    /* Background END */
 
+    ctx.lineWidth = size * 0.14;
     let position = -90;
     for (const [category, numTrackers] of Object.entries(groupedCategories)) {
       if (numTrackers > 0) {
@@ -53,8 +67,8 @@ class WTMTrackerWheel {
       canvas = new OffscreenCanvas(size, size);
     } catch (e) {
       canvas = document.createElement("canvas");
-      canvas.setAttribute('height', size);
-      canvas.setAttribute('width', size);
+      canvas.width = size;
+      canvas.height = size;
     }
     const ctx = canvas.getContext('2d');
     this.draw(ctx, size, categories);
@@ -66,7 +80,7 @@ class WTMTrackerWheel {
     return degree * factor;
   }
 
-  static _setupCtx(ctx, size) {
+  static setupCtx(ctx, size) {
     const { canvas } = ctx;
 
     canvas.style.width = size + "px";

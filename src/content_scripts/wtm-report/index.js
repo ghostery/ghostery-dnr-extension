@@ -91,6 +91,7 @@ function renderWheel(anchor, stats) {
   const canvas = document.createElement('canvas');
   canvas.classList.add('wtm-tracker-wheel');
   const ctx = canvas.getContext('2d');
+  WTMTrackerWheel.setupCtx(ctx, 22);
   WTMTrackerWheel.draw(ctx, 22, stats.stats);
 
   container.appendChild(canvas);

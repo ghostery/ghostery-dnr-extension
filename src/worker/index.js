@@ -60,9 +60,11 @@ updateOptions();
 let updateIcon = updateIconNow;
 
 function updateIconNow(tabId, stats) {
+  const categories = stats.trackers.map(t => t.category);
+  const imageData = WTMTrackerWheel.offscreenImageData(128, categories);
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
-    imageData: WTMTrackerWheel.offscreenImageData(128, stats.trackers.map(t => t.category)),
+    imageData,
   });
   resetUpdateIconDebounceMode();
 }
@@ -147,6 +149,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       // effect that in most cases, you will see Ghosty as the icon.
       // For the moment, that looks better then an empty icon. :-)
       if (stats.trackers.length > 0) {
+        console.warn("XXXX", stats)
         updateIcon(tabId, stats);
       }
     }
