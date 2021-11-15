@@ -17,7 +17,7 @@ import "./components/wtm-report.js";
   let resizes = 0;
   const resizeObserver = new ResizeObserver(() => {
     if (resizes > 0) {
-      const height = document.body.scrollHeight;
+      const height = document.body.clientHeight;
       window.parent.postMessage(`WTMReportResize:${height}`, "*");
     }
     resizes += 1;
