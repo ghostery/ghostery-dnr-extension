@@ -11,7 +11,7 @@
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 
-const isMobile = window.navigator.userAgent.match(/iPhone/i);
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 function closePopups() {
   [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
@@ -57,6 +57,12 @@ function renderWheel(anchor, stats) {
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
   const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
+
+  if (!threeDotsElement) {
+    // that's not a "full" result
+    return;
+  }
+
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   if (isMobile) {
@@ -105,7 +111,12 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
 
   elements.forEach((elem, i) => {
     if (response.wtmStats[i]) {
-      renderWheel(elem, response.wtmStats[i]);
+      try {
+        console.warn(elem);
+        renderWheel(elem, response.wtmStats[i]);
+      } catch (e) {
+        // ignore errors
+      }
     }
   });
 });
