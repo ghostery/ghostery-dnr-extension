@@ -10,20 +10,22 @@
  */
 
 class WTMTrackerWheel {
-  static draw(ctx, categories) {
+  static draw(ctx, size, categories) {
     // Group trackers by sorted category
     // (JavaScript objects will preserve the order)
     const groupedCategories = {};
     this.CATEGORY_ORDER.forEach(c => groupedCategories[c] = 0);
     categories.forEach(c => groupedCategories[c] += 1);
 
-    const { canvas } = ctx;
-    const { width } = canvas;
-    const center = width / 2;
+    if (typeof window !== "undefined") {
+      this._setupCtx(ctx);
+    }
+
+    const center = size / 2;
     const increment = 360 / categories.length;
 
-    ctx.lineWidth = width * 0.14;
-    const radius = width / 2 - ctx.lineWidth;
+    ctx.lineWidth = size * 0.14;
+    const radius = size / 2 - ctx.lineWidth;
 
     let position = -90;
     for (const [category, numTrackers] of Object.entries(groupedCategories)) {
@@ -55,13 +57,29 @@ class WTMTrackerWheel {
       canvas.setAttribute('width', size);
     }
     const ctx = canvas.getContext('2d');
-    this.draw(ctx, categories);
+    this.draw(ctx, size, categories);
     return ctx.getImageData(0, 0, size, size);
   }
 
   static _degToRad(degree) {
     const factor = Math.PI / 180;
     return degree * factor;
+  }
+
+  static _setupCtx(ctx) {
+    const { canvas } = ctx;
+    const size = canvas.width;
+
+    canvas.style.width = size + "px";
+    canvas.style.height = size + "px";
+
+    // Set actual size in memory (scaled to account for extra pixel density).
+    const scale = window.devicePixelRatio;
+    canvas.width = Math.floor(size * scale);
+    canvas.height = Math.floor(size * scale);
+
+    // Normalize coordinate system to use css pixels.
+    ctx.scale(scale, scale);
   }
 }
 

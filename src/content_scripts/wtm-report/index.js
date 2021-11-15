@@ -90,10 +90,8 @@ function renderWheel(anchor, stats) {
 
   const canvas = document.createElement('canvas');
   canvas.classList.add('wtm-tracker-wheel');
-  canvas.setAttribute('width', '22px');
-  canvas.setAttribute('height', '22px');
   const ctx = canvas.getContext('2d');
-  WTMTrackerWheel.draw(ctx, stats.stats);
+  WTMTrackerWheel.draw(ctx, 22, stats.stats);
 
   container.appendChild(canvas);
   container.appendChild(label);
@@ -112,7 +110,6 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
   elements.forEach((elem, i) => {
     if (response.wtmStats[i]) {
       try {
-        console.warn(elem);
         renderWheel(elem, response.wtmStats[i]);
       } catch (e) {
         // ignore errors
