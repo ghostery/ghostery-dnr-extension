@@ -149,7 +149,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       // effect that in most cases, you will see Ghosty as the icon.
       // For the moment, that looks better then an empty icon. :-)
       if (stats.trackers.length > 0) {
-        console.warn("XXXX", stats)
         updateIcon(tabId, stats);
       }
     }

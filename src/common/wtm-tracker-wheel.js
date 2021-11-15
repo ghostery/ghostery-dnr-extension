@@ -21,7 +21,7 @@ class WTMTrackerWheel {
     const increment = 360 / categories.length;
 
     /* Background START */
-    // This special blue background is requried for Destkop Safari to render the colors property
+    // This special blue background is required for Desktop Safari to render the colors property
     // We've tried: white, black, red and transparent - non of those works
     // Line width has to be a little bit smaller than the final arc so it blue wont be visible on dithered edges.
     // Line width cannot be too small as otherwise Safari will render the colors incorrectly.
