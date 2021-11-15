@@ -18,7 +18,7 @@ class WTMTrackerWheel {
     categories.forEach(c => groupedCategories[c] += 1);
 
     if (typeof window !== "undefined") {
-      this._setupCtx(ctx);
+      this._setupCtx(ctx, size);
     }
 
     const center = size / 2;
@@ -66,9 +66,8 @@ class WTMTrackerWheel {
     return degree * factor;
   }
 
-  static _setupCtx(ctx) {
+  static _setupCtx(ctx, size) {
     const { canvas } = ctx;
-    const size = canvas.width;
 
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";

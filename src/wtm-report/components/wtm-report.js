@@ -100,6 +100,8 @@ define({
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 22px;
+      width: 22px;
     }
 
     .svg-button svg {
