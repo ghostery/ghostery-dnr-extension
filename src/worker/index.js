@@ -89,22 +89,51 @@ function resetUpdateIconDebounceMode() {
   });
 }
 
+// When a navigation event happens, we need to reset the tracker stats.
+// In contrast, we do not reset the stats for redirects.
 chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
+  console.debug('Navigated to', url);
   const { domain } = tldts.parse(url);
-  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  tabStats.set({ tabId, url }, { domain, trackers: [], loadTime: 0 });
   resetUpdateIconImmediateMode();
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
-  tabStats.delete(tabId);
+  // Implementation detail: the API does not provide us the URL
+  // of the closed tab. Fortunately, we map only the tabId while
+  // the url is only used for the checksum. As we only use the
+  // checksum for read operations, we can pass any non-undefined
+  // value for the url.
+  tabStats.delete({ tabId, url: null });
 });
+
+// We have to keep track of redirects, as otherwise the logic
+// to match stats by tabId+URL would break once the URL changes.
+// That is why we need to migrate the stats after each redirect
+// to avoid checksum errors.
+chrome.webRequest.onBeforeRedirect.addListener(({ tabId, frameId, url, redirectUrl }) => {
+  if (frameId !== 0) {
+    return;
+  }
+  console.debug('onBeforeRedirect:', url, '->', redirectUrl, ' in tabId:', tabId);
+  const oldResults = tabStats.get({ tabId, url });
+  if (oldResults) {
+    tabStats.set({ tabId, url: redirectUrl }, oldResults);
+  }
+}, { urls: ['<all_urls>'], types: ['main_frame'] });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === "dnrUpdate") {
     updateAdblockerEngineStatuses();
+    return false;
+  }
+  if (msg.action === "getTabStats") {
+    const { tabId, url } = msg.args;
+    const stats = tabStats.get({ tabId, url });
+    sendResponse(stats);
     return false;
   }
 
@@ -127,8 +156,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (msg.action === "updateTabStats") {
-    const stats = tabStats.get(tabId);
+  if (msg.action === "updateCurrentTabStats") {
+    const stats = tabStats.get({ tabId, url: sender.url });
     const urls = msg.args[0].urls;
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
@@ -141,7 +170,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         }
       });
     }
-    tabStats.set(tabId, stats);
+    tabStats.set({ tabId, url: sender.url }, stats);
 
     if (!options.trackerWheelDisabled) {
       // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).

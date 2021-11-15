@@ -39,9 +39,21 @@ const Stats = {
   [store.connect] : {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
-      const storage = await chrome.storage.local.get(['tabStats:v1']);
-      const tabStats = storage['tabStats:v1'].entries[currentTab.id];
-      return tabStats;
+      return new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage({
+          action: 'getTabStats',
+          args: {
+            tabId: currentTab.id,
+            url: currentTab.url,
+          },
+        }, (response) => {
+          if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
+            return;
+          }
+          resolve(response);
+        });
+      });
     },
   },
 };

@@ -16,7 +16,7 @@ const webkit = {
   messageHandlers: {
     trackingProtectionStats: {
       postMessage({ urls }) {
-        chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ urls }]});
+        chrome.runtime.sendMessage({ action: "updateCurrentTabStats", args: [{ urls }]});
       },
     },
   },

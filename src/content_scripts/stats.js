@@ -14,5 +14,5 @@ let loadTime = 0;
 
 window.addEventListener('load', () => {
   loadTime = Date.now() - start;
-  chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ loadTime }]});
+  chrome.runtime.sendMessage({ action: "updateCurrentTabStats", args: [{ loadTime }]});
 });

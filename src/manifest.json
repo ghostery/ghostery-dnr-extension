@@ -254,6 +254,7 @@
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
     "webNavigation",
+    "webRequest",
     "storage",
     "tabs",
     "scripting"
