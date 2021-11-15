@@ -19,6 +19,12 @@ function closePopups() {
   });
 }
 
+function resizePopup(height) {
+  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
+    popup.style.height = `${height}px`;
+  });
+}
+
 const getTop = el => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
 
 function renderPopup(container, stats) {
@@ -111,6 +117,12 @@ window.addEventListener('message', (message) => {
 
   if (message.data === 'WTMReportClosePopups') {
     closePopups();
+    return;
+  }
+
+  if (message.data.startsWith('WTMReportResize')) {
+    const height = message.data.split(':')[1];
+    resizePopup(height);
     return;
   }
 });
