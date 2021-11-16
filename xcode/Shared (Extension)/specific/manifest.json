@@ -446,6 +446,7 @@
       ],
       "run_at": "document_start",
       "js": [
+        "content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js",
         "content_scripts/anti-google-tracking/index.js"
       ]
     }
