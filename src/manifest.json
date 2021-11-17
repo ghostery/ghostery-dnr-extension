@@ -291,7 +291,7 @@
       "resources": [
         "content_scripts/whotracksme/ghostery-whotracksme.js"
       ],
-      "all_frames": false,
+      "all_frames": true,
       "matches": [
         "<all_urls>"
       ]

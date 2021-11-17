@@ -79,6 +79,6 @@
   originalSendBeacon = window.Navigator.prototype.sendBeacon;
   window.Navigator.prototype.sendBeacon = function(url, data) {
     sendMessage(url);
-    originalSendBeacon.apply(window.navigator, arguments);
+    return originalSendBeacon.apply(window.navigator, arguments);
   };
 })();
