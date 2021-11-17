@@ -70,7 +70,7 @@ function runScriptInHostPage(scriptName) {
   (document.head || document.documentElement).appendChild(script);
 }
 
-runScriptInHostPage('content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js');
+runScriptInHostPage('content_scripts/prevent-serp-tracking/prevent-beacon-api-tracking.js');
 
 document.addEventListener('click', safeLinkClick, true);
 document.addEventListener('onmousedown', linkCleaner, true);

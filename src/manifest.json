@@ -447,7 +447,7 @@
       "run_at": "document_start",
       "all_frames": true,
       "js": [
-        "content_scripts/anti-google-tracking/index.js"
+        "content_scripts/prevent-serp-tracking/index.js"
       ]
     }
   ],
@@ -695,7 +695,7 @@
     },
     {
       "resources": [
-        "content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js"
+        "content_scripts/prevent-serp-tracking/prevent-beacon-api-tracking.js"
       ],
       "all_frames": true,
       "matches": [
