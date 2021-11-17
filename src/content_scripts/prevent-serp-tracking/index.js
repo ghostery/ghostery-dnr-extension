@@ -29,6 +29,7 @@ function safeLinkClick(event) {
   try {
     const directUrl = new URL(link.href).searchParams.get('url');
     if (directUrl) {
+      console.debug('safeLinkClick changed:', link.href, '->', directUrl);
       window.location = directUrl;
     }
   } catch (e) {
@@ -53,24 +54,6 @@ function linkCleaner(event) {
       console.error(e);
     }
 }
-
-// Break out of the "isolated world" provided by the content script
-// (https://developer.chrome.com/docs/extensions/mv3/content_scripts/#isolated_world).
-//
-// This implementation is compatible with Manifest V3. It has been adopted
-// from https://stackoverflow.com/a/9517879/783510. Depending on the browser,
-// The code needs to be shipped as part of the extension in a separate script,
-// which must be listed in the manifest in the "web_accessible_resources" section.
-function runScriptInHostPage(scriptName) {
-  const script = document.createElement('script');
-  script.src = chrome.runtime.getURL(scriptName);
-  script.onload = function() {
-    this.remove();
-  };
-  (document.head || document.documentElement).appendChild(script);
-}
-
-runScriptInHostPage('content_scripts/prevent-serp-tracking/prevent-beacon-api-tracking.js');
 
 document.addEventListener('click', safeLinkClick, true);
 document.addEventListener('onmousedown', linkCleaner, true);

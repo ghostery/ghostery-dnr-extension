@@ -499,7 +499,6 @@
   },
   "content_security_policy" : {},
   "web_accessible_resources": [
-    "wtm-report/index.html",
-    "content_scripts/prevent-serp-tracking/prevent-beacon-api-tracking.js"
+    "wtm-report/index.html"
   ]
 }
