@@ -446,7 +446,6 @@
       ],
       "run_at": "document_start",
       "js": [
-        "content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js",
         "content_scripts/anti-google-tracking/index.js"
       ]
     }
@@ -500,6 +499,7 @@
   },
   "content_security_policy" : {},
   "web_accessible_resources": [
-    "wtm-report/index.html"
+    "wtm-report/index.html",
+    "content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js"
   ]
 }

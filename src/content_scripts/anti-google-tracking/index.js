@@ -70,19 +70,8 @@ function runScriptInHostPage(scriptName) {
   (document.head || document.documentElement).appendChild(script);
 }
 
-function preventBeaconBasedTracking() {
-  if (chrome.runtime.getManifest().manifest_version == 2) {
-    // Compatibility with Manifest V2 (relevant for Safari):
-    const script = document.createElement('script');
-    script.textContent = '(' + patchBeaconApi + ')()';
-    (document.head || document.documentElement).appendChild(script);
-    script.remove();
-  } else {
-    runScriptInHostPage('content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js');
-  }
-}
+runScriptInHostPage('content_scripts/anti-google-tracking/prevent-beacon-api-tracking.js');
 
-preventBeaconBasedTracking();
 document.addEventListener('click', safeLinkClick, true);
 document.addEventListener('onmousedown', linkCleaner, true);
 document.addEventListener('touchstart', linkCleaner, true);

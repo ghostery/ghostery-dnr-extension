@@ -57,14 +57,4 @@ function patchBeaconApi() {
   var getScriptAttribute = currentScript.getAttribute.bind(currentScript);
 }
 
-// Execute only when in the context of the page, not in the content script
-//
-// (This is a trick to avoid code duplication while staying compatible
-// between Manifest V3 and Safari on Manifest V2. The detection whether
-// the code runs in the context of the page or content script might
-// not work across browser. For now, only Chrome, Safari and Apple
-// Mobile browers are supported.)
-if (!(chrome && chrome.runtime)) {
-  console.debug('Patching beacon API...');
-  patchBeaconApi();
-}
+patchBeaconApi();
