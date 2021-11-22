@@ -115,13 +115,20 @@ function resetUpdateIconDebounceMode() {
   });
 }
 
+function userNavigatedToNewPage({ tabId, domain }) {
+  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  resetUpdateIconImmediateMode();
+}
+
 chrome.webNavigation.onCommitted.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
   const { domain } = tldts.parse(url);
-  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
-  resetUpdateIconImmediateMode();
+  if (!domain) {
+    return;
+  }
+  userNavigatedToNewPage({ tabId, domain });
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -158,6 +165,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const urls = msg.args[0].urls;
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
+    }
+    if (msg.args[0].firstCall) {
+      const origin = msg.args[0].origin;
+      const { domain } = tldts.parse(origin);
+      if (!domain) {
+        return false;
+      }
+      userNavigatedToNewPage({ tabId, domain });
     }
     if (urls) {
       urls.forEach(url => {

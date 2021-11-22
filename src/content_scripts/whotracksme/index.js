@@ -10,11 +10,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-function postMessage({ urls }) {
-  chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ urls }]});
-}
-
 const origin = (new URL(window.location.href)).origin;
+
+let firstCall = true;
+function postMessage({ urls }) {
+  chrome.runtime.sendMessage({ action: "updateTabStats", args: [{
+    urls,
+    firstCall,
+    origin,
+  }]});
+  firstCall = false;
+}
 
 const start = Date.now();
 let loadTime = 0;
