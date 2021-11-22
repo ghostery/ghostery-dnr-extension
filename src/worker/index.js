@@ -115,13 +115,20 @@ function resetUpdateIconDebounceMode() {
   });
 }
 
+function userNavigatedToNewPage({ tabId, domain }) {
+  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  resetUpdateIconImmediateMode();
+}
+
 chrome.webNavigation.onCommitted.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
   const { domain } = tldts.parse(url);
-  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
-  resetUpdateIconImmediateMode();
+  if (!domain) {
+    return;
+  }
+  userNavigatedToNewPage({ tabId, domain });
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -137,19 +144,35 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (sender.tab === undefined) {
     throw new Error('required "sender.tab" information is not available');
   }
-
   if (sender.tab.id === undefined) {
     throw new Error('required "sender.tab.id" information is not available');
   }
-
   if (sender.frameId === undefined) {
     throw new Error('required "sender.frameId" information is not available');
+  }
+  if (sender.url === undefined) {
+    throw new Error('required "sender.url" information is not available');
   }
 
   const tabId = sender.tab.id;
 
   if (msg.action === "updateOptions") {
     updateOptions();
+    return false;
+  }
+
+  // Workaround for Safari:
+  // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
+  // with the correct tabId (sometimes it is correct, sometimes it is 0).
+  // Thus, let the content_script redundantly fire it.
+  //
+  // (Perhaps it is a bug in Safari. It can be triggered by opening
+  //  a bookmarked page from a new tab.)
+  if (msg.action === "onCommitted") {
+    const { domain } = tldts.parse(sender.url);
+    if (domain) {
+      userNavigatedToNewPage({ tabId, domain });
+    }
     return false;
   }
 
