@@ -115,12 +115,7 @@ function resetUpdateIconDebounceMode() {
   });
 }
 
-function userNavigatedToNewPage({ tabId, domain }) {
-  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
-  resetUpdateIconImmediateMode();
-}
-
-chrome.webNavigation.onCommitted.addListener(({ tabId, frameId, url }) => {
+function userNavigatedToNewPage({ tabId, frameId, url }) {
   if (frameId !== 0) {
     return;
   }
@@ -128,8 +123,11 @@ chrome.webNavigation.onCommitted.addListener(({ tabId, frameId, url }) => {
   if (!domain) {
     return;
   }
-  userNavigatedToNewPage({ tabId, domain });
-});
+  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  resetUpdateIconImmediateMode();
+}
+
+chrome.webNavigation.onCommitted.addListener(userNavigatedToNewPage);
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
   tabStats.delete(tabId);
@@ -169,10 +167,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // (Perhaps it is a bug in Safari. It can be triggered by opening
   //  a bookmarked page from a new tab.)
   if (msg.action === "onCommitted") {
-    const { domain } = tldts.parse(sender.url);
-    if (domain) {
-      userNavigatedToNewPage({ tabId, domain });
-    }
+    userNavigatedToNewPage({
+      tabId,
+      frameId: sender.frameId,
+      url: sender.url,
+    });
     return false;
   }
 
