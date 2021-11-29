@@ -10,6 +10,10 @@ function show(platform, enabled) {
     }
 }
 
+function subscribe() {
+    webkit.messageHandlers.controller.postMessage("open-subscription");
+}
+
 function openPreferences() {
     webkit.messageHandlers.controller.postMessage("open-preferences");
 }
