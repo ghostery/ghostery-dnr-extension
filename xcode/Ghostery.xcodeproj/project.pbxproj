@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266462756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266472756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266492756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664C2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664D2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664F2756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266502756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266522756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266532756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
+		462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
 		464B62C3274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
 		464B62C4274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
 		465E353F2754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
@@ -131,6 +147,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewRow.swift; sourceTree = "<group>"; };
+		462266432756DE6A00245D1E /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		462266452756DF9000245D1E /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		462266482756DFB800245D1E /* StoreErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreErrorView.swift; sourceTree = "<group>"; };
+		4622664B2756DFE800245D1E /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		4622664E2756E06D00245D1E /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		462266512756E09100245D1E /* PriveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriveViewModel.swift; sourceTree = "<group>"; };
+		462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewInfo.swift; sourceTree = "<group>"; };
 		464B62C2274F9B1A00F4CD07 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../src/fonts; sourceTree = "<group>"; };
 		465E353E2754EB870032B8D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWebView.swift; sourceTree = "<group>"; };
@@ -221,6 +245,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4622663F2756DDEE00245D1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */,
+				462266432756DE6A00245D1E /* SubscriptionView.swift */,
+				462266452756DF9000245D1E /* PurchaseButton.swift */,
+				462266482756DFB800245D1E /* StoreErrorView.swift */,
+				4622664B2756DFE800245D1E /* BadgeView.swift */,
+				4622664E2756E06D00245D1E /* PriceView.swift */,
+				462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		465E356C27564A250032B8D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +276,7 @@
 				465E356B27554CEB0032B8D2 /* Products.storekit */,
 				465E359E27567A730032B8D2 /* Configuration */,
 				465E357B27564D850032B8D2 /* StoreHelper */,
+				4622663F2756DDEE00245D1E /* Views */,
 				465E3596275679730032B8D2 /* ViewModels */,
 			);
 			path = StoreHelper;
@@ -288,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				465E3597275679900032B8D2 /* SubscriptionViewModel.swift */,
+				462266512756E09100245D1E /* PriveViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -633,19 +673,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				465E353F2754EB870032B8D2 /* ContentView.swift in Sources */,
+				462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */,
 				465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */,
 				465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				4622664F2756E06D00245D1E /* PriceView.swift in Sources */,
 				465E357D27564D910032B8D2 /* StoreLog.swift in Sources */,
 				465E357527564ABB0032B8D2 /* Configuration.swift in Sources */,
 				465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */,
 				465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
+				462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
 				465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */,
+				462266522756E09100245D1E /* PriveViewModel.swift in Sources */,
 				465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */,
 				465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */,
 				465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */,
+				462266462756DF9000245D1E /* PurchaseButton.swift in Sources */,
 				465E3586275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				4622664C2756DFE800245D1E /* BadgeView.swift in Sources */,
 				465E358027564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */,
 				465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266492756DFB800245D1E /* StoreErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,18 +702,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				465E35462754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266532756E09100245D1E /* PriveViewModel.swift in Sources */,
 				465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */,
+				4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */,
 				465E358F275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */,
 				465E357E27564D910032B8D2 /* StoreLog.swift in Sources */,
 				465E357627564ABB0032B8D2 /* Configuration.swift in Sources */,
+				4622664D2756DFE800245D1E /* BadgeView.swift in Sources */,
+				462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
 				465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				462266472756DF9000245D1E /* PurchaseButton.swift in Sources */,
 				465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
 				468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */,
 				465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */,
 				465E35672755368B0032B8D2 /* Subscriptions.swift in Sources */,
 				465E3592275674830032B8D2 /* PurchaseInfo.swift in Sources */,
 				465E3587275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				462266502756E06D00245D1E /* PriceView.swift in Sources */,
 				465E358127564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */,
 				465E35402754EB870032B8D2 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,18 +11,21 @@ struct ContentView: View {
     var openInWebView: (URL) -> Void
 
     @State private var showSubscriptions = true
+    @StateObject var storeHelper = StoreHelper()
 
     var body: some View {
-        if !showSubscriptions {
-            WelcomeWebView(
-                openInWebView: openInWebView,
-                openSubscriptions: toggleSubscriptions
-            )
-                .ignoresSafeArea()
-        }
-        if showSubscriptions {
-            Subscriptions(closeSubscriptions: toggleSubscriptions)
-        }
+        VStack {
+            if !showSubscriptions {
+                WelcomeWebView(
+                    openInWebView: openInWebView,
+                    openSubscriptions: toggleSubscriptions
+                )
+                    .ignoresSafeArea()
+            }
+            if showSubscriptions {
+                Subscriptions(closeSubscriptions: toggleSubscriptions)
+            }
+        }.environmentObject(storeHelper)
     }
 
     func toggleSubscriptions() {

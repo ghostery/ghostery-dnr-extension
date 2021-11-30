@@ -10,7 +10,7 @@ import SwiftUI
 struct Subscriptions: View {
     var closeSubscriptions: () -> Void
 
-    @StateObject var storeHelper = StoreHelper()
+    @EnvironmentObject var storeHelper: StoreHelper
 
     var body: some View {
         VStack() {
@@ -37,27 +37,10 @@ struct Subscriptions: View {
                 Text("Subscribe Today for just $3.99/month")
 
                 if storeHelper.hasProducts {
-                    List(storeHelper.products!) { product in
-                        HStack {
-                            Text(product.displayName)
-                                .font(.title2)
-                                .padding()
-
-                            Spacer()
-
-                            Text(product.displayPrice)
-                                .font(.title2)
-                                .foregroundColor(.blue)
-                                .padding()
-
-                            Button(action: {
-                                Task.init { try await storeHelper.purchase(product) }
-
-                            }) {
-                                Text("Purchase")
-                            }
+                    List {
+                        if let subscriptions = storeHelper.subscriptionProducts {
+                            SubscriptionListViewRow(products: subscriptions, headerText: "Subscriptions")
                         }
-                        .padding()
                     }
                     .listStyle(.inset)
 
