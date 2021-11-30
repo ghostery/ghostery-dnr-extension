@@ -15,11 +15,11 @@ extension WelcomeWebView: NSViewRepresentable {
     func makeNSView(context: NSViewRepresentableContext<WelcomeWebView>) -> WKWebView {
         //        webView.navigationDelegate = context.coordinator
         //        webView.uiDelegate = context.coordinator
+        load()
         return webView
     }
 
     func updateNSView(_ nsView: WKWebView, context: NSViewRepresentableContext<WelcomeWebView>) {
-        load()
     }
 }
 

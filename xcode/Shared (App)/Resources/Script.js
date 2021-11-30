@@ -10,9 +10,9 @@ function show(platform, enabled) {
     }
 }
 
-function subscribe() {
-    webkit.messageHandlers.controller.postMessage("open-subscription");
-}
+document.querySelector('.subscription button').addEventListener('click', function() {
+    webkit.messageHandlers.controller.postMessage("open-subscriptions");
+});
 
 function openPreferences() {
     webkit.messageHandlers.controller.postMessage("open-preferences");

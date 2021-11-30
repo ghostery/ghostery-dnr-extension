@@ -18,11 +18,12 @@ let extensionBundleIdentifier = "com.ghostery.lite.extension"
 
 struct WelcomeWebView {
     var openInWebView: (URL) -> Void
+    var openSubscriptions: () -> Void
     let navigationHelper = WebViewHelper()
     let webView: WKWebView = WKWebView()
 
     public func load() {
-        let userContentHelper = WebViewUserContentHelper(openInWebView: openInWebView)
+        let userContentHelper = WebViewUserContentHelper(openInWebView: openInWebView, openSubscriptions: openSubscriptions)
 
         webView.navigationDelegate = navigationHelper
 
@@ -41,14 +42,20 @@ struct WelcomeWebView {
 
 class WebViewUserContentHelper: NSObject, WKScriptMessageHandler {
     var openInWebView: (URL) -> Void
+    var openSubscriptions: () -> Void
 
-    init(openInWebView: @escaping (URL) -> Void) {
+    init(openInWebView: @escaping (URL) -> Void, openSubscriptions: @escaping () -> Void) {
         self.openInWebView = openInWebView
+        self.openSubscriptions = openSubscriptions
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.body as! String == "open-support") {
             openInWebView(URL(string: "https://www.ghostery.com/support")!)
+        }
+
+        if (message.body as! String == "open-subscriptions") {
+            openSubscriptions()
         }
 
         #if os(macOS)
