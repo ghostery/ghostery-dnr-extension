@@ -1,8 +1,8 @@
 //
-//  SubscriptionListViewRow.swift
-//  SubscriptionListViewRow
+//  ContentView.swift
+//  Ghostery
 //
-//  Created by Russell Archer on 07/08/2021.
+//  Created by Krzysztof Jan Modras on 29.11.21.
 //
 
 import SwiftUI
@@ -15,12 +15,9 @@ struct SubscriptionListViewRow: View {
     @State private var subscriptionGroups: OrderedSet<String>?
     @State private var subscriptionInfo: OrderedSet<SubscriptionInfo>?
     var products: [Product]
-    var headerText: String
 
     var body: some View {
-        Section(header: Text(headerText)) {
-            // For each product in the group, display as a row using SubscriptionView().
-            // If the product is the highest subscription level then pass SubscriptionInfo to SubscriptionView().
+        VStack {
             ForEach(products, id: \.id) { product in
                 SubscriptionView(productId: product.id,
                                  displayName: product.displayName,
@@ -29,6 +26,10 @@ struct SubscriptionListViewRow: View {
                                  subscriptionInfo: subscriptionInformation(for: product))
             }
         }
+#if os(macOS)
+        .padding(.horizontal, 5)
+        .background(.white)
+#endif
         .onAppear { getGrouSubscriptionInfo() }
         .onChange(of: storeHelper.purchasedProducts) { _ in getGrouSubscriptionInfo() }
     }

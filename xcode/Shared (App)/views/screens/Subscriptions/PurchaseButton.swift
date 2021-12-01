@@ -1,8 +1,8 @@
 //
-//  PurchaseButton.swift
-//  StoreHelper
+//  ContentView.swift
+//  Ghostery
 //
-//  Created by Russell Archer on 21/06/2021.
+//  Created by Krzysztof Jan Modras on 29.11.21.
 //
 
 import SwiftUI

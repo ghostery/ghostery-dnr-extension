@@ -1,8 +1,8 @@
 //
-//  SubscriptionView.swift
-//  SubscriptionView
+//  ContentView.swift
+//  Ghostery
 //
-//  Created by Russell Archer on 07/08/2021.
+//  Created by Krzysztof Jan Modras on 29.11.21.
 //
 
 import SwiftUI
@@ -21,31 +21,28 @@ struct SubscriptionView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(productId)
-                    .resizable()
-                    .frame(width: 75, height: 80)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(25)
-
-                Text(displayName)
-                    .font(.headline)
-                    .padding()
+                VStack {
+                    Text(displayName)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(description)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
 
                 Spacer()
 
                 PurchaseButton(purchaseState: $purchaseState, productId: productId, price: price)
             }
 
-            Text(description)
-                .font(.subheadline)
-                .foregroundColor(.gray)
-                .lineLimit(2)
-
             if purchaseState == .purchased, subscriptionInfo != nil {
                 SubscriptionInfoView(subscriptionInfo: subscriptionInfo!)
             }
         }
-        .padding()
+        .padding(.vertical)
         .onAppear {
             Task.init { await purchaseState(for: productId) }
         }

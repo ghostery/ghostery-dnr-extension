@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct Subscriptions: View {
+    var openInWebView: (URL) -> Void
     var closeSubscriptions: () -> Void
 
+    @State var isSubscribed = false;
     @EnvironmentObject var storeHelper: StoreHelper
 
     var body: some View {
@@ -23,42 +26,83 @@ struct Subscriptions: View {
                 }
 
                 Spacer()
-                Button(action: {}) {
+                Button(action: restorePurchases) {
                     HStack {
                         Text("Restore Payments")
                     }
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            VStack(spacing: 10) {
-                Text("Subscriptions")
-                
-                Text("Support Ghostery's mission to Track the Trackers")
-                Text("Subscribe Today for just $3.99/month")
+#if os(macOS)
+            .padding(.vertical)
+#endif
+                .frame(maxWidth: .infinity, alignment: .topLeading)
 
+
+            Text("Support our mission of clean, fast and free internet")
+                .multilineTextAlignment(.center)
+                .padding()
+            Text("Subscribe Today")
+                .font(.headline)
+                .padding()
+
+            VStack {
                 if storeHelper.hasProducts {
-                    List {
-                        if let subscriptions = storeHelper.subscriptionProducts {
-                            SubscriptionListViewRow(products: subscriptions, headerText: "Subscriptions")
-                        }
+                    if let subscriptions = storeHelper.subscriptionProducts {
+                        SubscriptionListViewRow(products: subscriptions)
                     }
-                    .listStyle(.inset)
-
                 } else {
-                    Text("No products")
+                    Text("No Subscriptions available")
                         .font(.title)
                         .foregroundColor(.red)
                 }
             }
 
+            Text("""
+            Important:
+            1. By subscribing to Ghostery you are supporting our mission. Thank you for beliving in us.
+
+            2. At the moment subscription does not unlock any features, but it helps us.
+
+            3. We work to implement more premium features on Apple platform.
+
+            4. Soon you will be able to link Apple Subscription to Ghostery account to unlock premium features on other platforms.
+            """)
+                .font(.footnote)
+                .lineLimit(nil)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+
+
+
+            Button("Terms of use") {
+                openInWebView(URL(string: "https://www.ghostery.com/")!)
+            }
+                .buttonStyle(.borderless)
+                .foregroundColor(.blue)
+                .padding()
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(10)
+        .padding(.horizontal)
+        .onAppear { getSubscriptionInfo() }
+    }
+
+    /// Restores previous user purchases. With StoreKit2 this is normally not necessary and should only be
+    /// done in response to explicit user action. Will result in the user having to authenticate with the
+    /// App Store.
+    private func restorePurchases() {
+        Task.init { try? await AppStore.sync() }
+    }
+
+    private func getSubscriptionInfo() {
+        Task.init {
+            let entitlements = await storeHelper.currentEntitlements()
+            self.isSubscribed = !entitlements.isEmpty
+        }
     }
 }
 
 struct Subscriptions_Previews: PreviewProvider {
     static var previews: some View {
-        Subscriptions(closeSubscriptions: {})
+        Subscriptions(openInWebView: {_ in }, closeSubscriptions: {})
     }
 }

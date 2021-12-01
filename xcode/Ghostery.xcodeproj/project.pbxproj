@@ -245,20 +245,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4622663F2756DDEE00245D1E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */,
-				462266432756DE6A00245D1E /* SubscriptionView.swift */,
-				462266452756DF9000245D1E /* PurchaseButton.swift */,
-				462266482756DFB800245D1E /* StoreErrorView.swift */,
-				4622664B2756DFE800245D1E /* BadgeView.swift */,
-				4622664E2756E06D00245D1E /* PriceView.swift */,
-				462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		465E356C27564A250032B8D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +262,6 @@
 				465E356B27554CEB0032B8D2 /* Products.storekit */,
 				465E359E27567A730032B8D2 /* Configuration */,
 				465E357B27564D850032B8D2 /* StoreHelper */,
-				4622663F2756DDEE00245D1E /* Views */,
 				465E3596275679730032B8D2 /* ViewModels */,
 			);
 			path = StoreHelper;
@@ -319,6 +304,13 @@
 		465E3595275679500032B8D2 /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
+				4622664B2756DFE800245D1E /* BadgeView.swift */,
+				4622664E2756E06D00245D1E /* PriceView.swift */,
+				462266452756DF9000245D1E /* PurchaseButton.swift */,
+				462266482756DFB800245D1E /* StoreErrorView.swift */,
+				462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */,
+				462266432756DE6A00245D1E /* SubscriptionView.swift */,
+				462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";

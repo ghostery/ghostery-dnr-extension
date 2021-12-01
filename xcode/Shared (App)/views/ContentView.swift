@@ -23,7 +23,10 @@ struct ContentView: View {
                     .ignoresSafeArea()
             }
             if showSubscriptions {
-                Subscriptions(closeSubscriptions: toggleSubscriptions)
+                Subscriptions(
+                    openInWebView: openInWebView,
+                    closeSubscriptions: toggleSubscriptions
+                )
             }
         }.environmentObject(storeHelper)
     }

@@ -1,10 +1,9 @@
 //
-//  BadgeView.swift
-//  StoreHelper
+//  ContentView.swift
+//  Ghostery
 //
-//  Created by Russell Archer on 21/06/2021.
+//  Created by Krzysztof Jan Modras on 29.11.21.
 //
-
 import SwiftUI
 
 /// Displays a small image that gives a visual clue to the product's purchase state.
@@ -20,6 +19,7 @@ struct BadgeView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25, height: 25)
                 .foregroundColor(options.fgColor)
+                .padding(.horizontal, 30)
         }
     }
 

@@ -28,8 +28,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Do it once, but do it well. Thank you!",
-              "displayName" : "Yearly Supporter",
+              "description" : "Just $3.99/month",
+              "displayName" : "Annual Subscription",
               "locale" : "en_US"
             }
           ],
@@ -50,8 +50,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Every bit counts. Thank you!",
-              "displayName" : "Monthly Supporter",
+              "description" : "",
+              "displayName" : "Monthly Subscription",
               "locale" : "en_US"
             }
           ],
