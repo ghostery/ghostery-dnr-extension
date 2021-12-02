@@ -19,7 +19,7 @@ let extensionBundleIdentifier = "com.ghostery.lite.extension"
 struct WelcomeWebView {
     var openInWebView: (URL) -> Void
     var openSubscriptions: () -> Void
-    let navigationHelper = WebViewHelper()
+    @State var navigationHelper = WebViewHelper()
     let webView: WKWebView = WKWebView()
 
     public func load() {

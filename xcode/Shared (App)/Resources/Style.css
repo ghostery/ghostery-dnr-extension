@@ -98,6 +98,12 @@ button {
     text-decoration: none;
 }
 
+.disabled {
+    color: #cc3333;
+    font-weight: bold;
+    font-style: normal;
+}
+
 .subscription {
     display: flex;
     flex-direction: column;
