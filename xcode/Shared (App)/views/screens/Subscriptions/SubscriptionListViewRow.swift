@@ -28,7 +28,6 @@ struct SubscriptionListViewRow: View {
         }
 #if os(macOS)
         .padding(.horizontal, 5)
-        .background(.white)
 #endif
         .onAppear { getGrouSubscriptionInfo() }
         .onChange(of: storeHelper.purchasedProducts) { _ in getGrouSubscriptionInfo() }

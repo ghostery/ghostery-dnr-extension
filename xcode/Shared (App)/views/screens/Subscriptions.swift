@@ -28,7 +28,7 @@ struct Subscriptions: View {
                 Spacer()
                 Button(action: restorePurchases) {
                     HStack {
-                        Text("Restore Payments")
+                        Text("Restore subscription")
                     }
                 }
             }
@@ -38,10 +38,10 @@ struct Subscriptions: View {
                 .frame(maxWidth: .infinity, alignment: .topLeading)
 
 
-            Text("Support our mission of clean, fast and free internet")
+            Text("Support our mission for a clean, fast, and free internet.")
                 .multilineTextAlignment(.center)
                 .padding()
-            Text("Subscribe Today")
+            Text("Choose a subscription plan:")
                 .font(.headline)
                 .padding()
 
@@ -58,19 +58,17 @@ struct Subscriptions: View {
             }
 
             Text("""
-            Important:
-            1. By subscribing to Ghostery you are supporting our mission. Thank you for beliving in us.
+            • By subscribing to Ghostery, your are supporting our mission. Thank you for believing in us!
 
-            2. At the moment subscription does not unlock any features, but it helps us.
+            • For now the subscription does not unlock any additional features but it helps us.
 
-            3. We work to implement more premium features on Apple platform.
+            • We are working on implementing more premium features for you on the Apple platform.
 
-            4. Soon you will be able to link Apple Subscription to Ghostery account to unlock premium features on other platforms.
+            • You will be soon able to link your Apple subscription to your Ghostery account for unlocking premium features on further platforms.
             """)
                 .font(.footnote)
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-
 
 
             Button("Terms of use") {

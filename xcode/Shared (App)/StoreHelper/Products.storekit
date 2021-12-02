@@ -28,8 +28,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Just $3.99/month",
-              "displayName" : "Annual Subscription",
+              "description" : "$3.99/month - Cancel anytime",
+              "displayName" : "Yearly subscription",
               "locale" : "en_US"
             }
           ],
@@ -50,8 +50,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "Monthly Subscription",
+              "description" : "Cancel anytime",
+              "displayName" : "Monthly subscription",
               "locale" : "en_US"
             }
           ],

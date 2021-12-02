@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var openInWebView: (URL) -> Void
 
-    @State private var showSubscriptions = true
+    @State private var showSubscriptions = false
     @StateObject var storeHelper = StoreHelper()
 
     var body: some View {

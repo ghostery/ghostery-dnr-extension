@@ -20,6 +20,7 @@ struct SubscriptionInfoView: View {
 
         Text(subscriptionInfoText)
             .font(.footnote)
+            .foregroundColor(.gray)
             .lineLimit(nil)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)

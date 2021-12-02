@@ -25,6 +25,7 @@ struct SubscriptionView: View {
                     Text(displayName)
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(.blue)
                     Text(description)
                         .font(.subheadline)
                         .foregroundColor(.gray)

@@ -21,14 +21,16 @@ struct SubscriptionInfoViewModel {
 
         if let state = subscriptionInfo.subscriptionStatus?.state {
             switch state {
-            case .subscribed: text += "Subscribed."
-            case .inGracePeriod: text += "Subscribed. Expires shortly."
+            case .subscribed: text += "Your are now subscribed."
+            case .inGracePeriod: text += "Your are now subscribed. Subscription expires shortly."
             case .inBillingRetryPeriod: text += "Subscribed. Renewal failed."
             case .revoked: text += "Subscription revoked."
             case .expired: text += "Subscription expired."
             default: text += "Subscription state unknown."
             }
         }
+
+        text += " Subscription details: "
 
         if let subscription = subscriptionInfo.product?.subscription {
             var periodUnitText: String
