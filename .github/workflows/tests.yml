@@ -16,5 +16,5 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-      - run: npm install
+      - run: npm ci --ignore-scripts
       - run: npm test
