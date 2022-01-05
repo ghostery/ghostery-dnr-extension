@@ -10,9 +10,9 @@
  */
 
 import { html, define, store, dispatch } from '/hybrids.js';
-import "../../ui/components/wtm-stats/index.js";
-import "./simple-view/toggle-switch.js";
-import "./simple-view/page-load.js";
+import '../../ui/components/wtm-stats/index.js';
+import './simple-view/toggle-switch.js';
+import './simple-view/page-load.js';
 import { toggles } from '../../common/rulesets.js';
 import { t } from '../../common/i18n.js';
 import { externalLink, chevronRight } from '../../ui/icons.js';
@@ -46,40 +46,40 @@ function wtmLink(stats) {
     () => link,
     () => placeholder,
   );
-  return html.resolve(
-    promise,
-    placeholder,
-  );
+  return html.resolve(promise, placeholder);
 }
 
 define({
-  tag: "simple-view",
+  tag: 'simple-view',
   settings: null,
   stats: null,
   content: ({ settings, stats }) => html`
     <main>
-
       <h1>${t('privacy_protection')}</h1>
 
       <section class="toggles">
-        ${store.ready(settings) && toggles.map((toggle) => html`
-          <toggle-switch toggle=${toggle} settings=${settings}></toggle-switch>
-        `)}
+        ${store.ready(settings) &&
+        toggles.map(
+          (toggle) => html`
+            <toggle-switch
+              toggle=${toggle}
+              settings=${settings}
+            ></toggle-switch>
+          `,
+        )}
       </section>
 
-      ${store.ready(stats) && html`
-        <wtm-stats categories=${stats.categories}></wtm-stats>
-      `}
+      ${store.ready(stats) &&
+      html` <wtm-stats categories=${stats.categories}></wtm-stats> `}
 
       <section class="buttons">
-        <span>
-          ${wtmLink(stats)}
-        </span>
-        <a onclick="${toggleDetailedView}">${t('detailed_view')} ${chevronRight}</a>
+        <span> ${wtmLink(stats)} </span>
+        <a onclick="${toggleDetailedView}"
+          >${t('detailed_view')} ${chevronRight}</a
+        >
       </section>
 
       <page-load stats=${stats}></page-load>
-
     </main>
   `,
 });

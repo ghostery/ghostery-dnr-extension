@@ -12,25 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: asdf_install
-        uses: asdf-vm/actions/install@v1
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+      - uses: actions/setup-node@v2
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install
-        run: npm ci
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-
-      - name: Lint
-        run: npm run lint
+          node-version: '16'
+          cache: 'npm'
+      - run: npm install
+      - run: npm test
