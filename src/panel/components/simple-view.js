@@ -34,18 +34,17 @@ function wtmLink(stats) {
       ${t('statistical_report')} ${externalLink}
     </a>
   `;
-  const promise = new Promise(async (resolve, reject) => {
-    const request = await fetch(siteListUrl);
-    const json = await request.json();
-    if (json.indexOf(domain) > -1) {
-      resolve();
-    } else {
-      reject();
-    }
-  }).then(
-    () => link,
-    () => placeholder,
-  );
+
+  const promise = fetch(siteListUrl)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.indexOf(domain) > -1) {
+        return link;
+      }
+      throw Error('No domain entry found');
+    })
+    .catch(() => placeholder);
+
   return html.resolve(promise, placeholder);
 }
 
