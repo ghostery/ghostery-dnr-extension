@@ -11,7 +11,10 @@
 
 import { html, define, store, dispatch } from '/hybrids.js';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
-import { externalLink, chevronRight } from '/vendor/@whotracksme/ui/src/components/icons.js';
+import {
+  externalLink,
+  chevronRight,
+} from '/vendor/@whotracksme/ui/src/components/icons.js';
 import '/vendor/@whotracksme/ui/src/components/wtm-stats/index.js';
 
 import './simple-view/toggle-switch.js';

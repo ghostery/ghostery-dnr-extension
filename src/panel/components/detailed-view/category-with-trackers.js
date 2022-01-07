@@ -11,7 +11,10 @@
 
 import { html, define } from '/hybrids.js';
 import { t, getCategoryName } from '/vendor/@whotracksme/ui/src/i18n.js';
-import { chavronDown, externalLink } from '/vendor/@whotracksme/ui/src/components/icons.js';
+import {
+  chavronDown,
+  externalLink,
+} from '/vendor/@whotracksme/ui/src/components/icons.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
