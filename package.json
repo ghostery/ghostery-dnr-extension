@@ -63,6 +63,18 @@
     {
       "from": "../ghostery-dnr-lists/build",
       "to": "src/rule_resources"
+    },
+    {
+      "from": "../../whotracksme/tracking-the-trackers/packages/serp-report/src",
+      "to": "src/vendor/@whotracksme/serp-report/src"
+    },
+    {
+      "from": "../../whotracksme/tracking-the-trackers/packages/ui/src",
+      "to": "src/vendor/@whotracksme/ui/src"
+    },
+    {
+      "from": "../../whotracksme/tracking-the-trackers/packages/tracker-wheel/src",
+      "to": "src/vendor/@whotracksme/tracker-wheel/src"
     }
   ]
 }
