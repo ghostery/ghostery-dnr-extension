@@ -69,14 +69,20 @@ function getTrackerFromUrl(url, origin) {
   return null;
 }
 
+// Storage "Options" initialization
+
 let options = {};
 
-async function updateOptions() {
+(async function () {
   const storage = await chrome.storage.local.get(['options']);
   options = storage.options || {};
-}
+})();
 
-updateOptions();
+chrome.storage.onChanged.addListener(function (changes) {
+  if (changes.options) {
+    options = changes.options.newValue || {};
+  }
+});
 
 // Refreshing the tracker wheel:
 // * Immediately draw it when the first data comes in
@@ -155,11 +161,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   const tabId = sender.tab.id;
 
-  if (msg.action === 'updateOptions') {
-    updateOptions();
-    return false;
-  }
-
   // Workaround for Safari:
   // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
   // with the correct tabId (sometimes it is correct, sometimes it is 0).
@@ -209,7 +210,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
+  if (
+    (options.wtmSerpReport ?? true) &&
+    tryWTMReportOnMessageHandler(msg, sender, sendResponse)
+  ) {
     return false;
   }
 
