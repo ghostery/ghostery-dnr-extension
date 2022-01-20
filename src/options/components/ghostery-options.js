@@ -20,9 +20,16 @@ const Options = {
       const storage = await chrome.storage.local.get(['options']);
       return storage.options || {};
     },
-    set(_, options) {
-      chrome.storage.local.set({ options });
+    async set(_, options, keys) {
+      const prevOptions = await this.get();
+      const nextOptions = {
+        ...prevOptions,
+        ...Object.fromEntries(keys.map((key) => [key, options[key]])),
+      };
+
+      chrome.storage.local.set({ options: nextOptions });
       chrome.runtime.sendMessage({ action: 'updateOptions' });
+
       return options;
     },
   },
