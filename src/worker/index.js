@@ -73,16 +73,12 @@ function getTrackerFromUrl(url, origin) {
 
 let options = {};
 
-(async function () {
+async function updateOptions() {
   const storage = await chrome.storage.local.get(['options']);
   options = storage.options || {};
-})();
+}
 
-chrome.storage.onChanged.addListener(function (changes) {
-  if (changes.options) {
-    options = changes.options.newValue || {};
-  }
-});
+updateOptions();
 
 // Refreshing the tracker wheel:
 // * Immediately draw it when the first data comes in
@@ -160,6 +156,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 
   const tabId = sender.tab.id;
+
+  if (msg.action === 'updateOptions') {
+    updateOptions();
+    return false;
+  }
 
   // Workaround for Safari:
   // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"

@@ -16,12 +16,13 @@ const Options = {
   trackerWheelDisabled: false,
   wtmSerpReport: true,
   [store.connect]: {
-    get: async () => {
+    async get() {
       const storage = await chrome.storage.local.get(['options']);
       return storage.options || {};
     },
-    set: (_, options) => {
+    set(_, options) {
       chrome.storage.local.set({ options });
+      chrome.runtime.sendMessage({ action: 'updateOptions' });
       return options;
     },
   },
