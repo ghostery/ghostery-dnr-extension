@@ -11,6 +11,10 @@
  */
 
 (function () {
+  function log(...args) {
+    console.debug('[ghostery-indexeddb-tracking-mitigation]', ...args);
+  }
+
   // 'disable': remove the API (it does not exist on Firefox, so browser-independent code should be able to handle it)
   // 'hide-all': implement the API but always return an empty list (prevents tracking, but the side-effects are not clear)
   // 'hide-well-known-databases': like hide-all, but only hide some well-known databases (maybe more predicable, but may still break and still allow tracking)
@@ -19,19 +23,20 @@
   const METHOD = 'hide-well-known-databases';
 
   if (METHOD === 'disable') {
-    console.log('Monkey patching: remove indexedDB.databases function');
+    log('Monkey patching: remove indexedDB.databases function');
     delete IDBFactory.prototype.databases;
   } else if (METHOD === 'hide-all') {
-    console.log('Monkey patching indexedDB.databases() to always return []');
+    log('Monkey patching indexedDB.databases() to always return []');
     IDBFactory.prototype.databases = async function () {
-      console.log('Calling IDBFactory.prototype.databases (always return [])');
+      log('Calling IDBFactory.prototype.databases (always return [])');
       return [];
     };
   } else if (METHOD === 'hide-well-known-databases') {
-    console.log('Monkey patching indexedDB.databases() to hide well-known databases');
+    log('Monkey patching indexedDB.databases() to hide well-known databases');
     const originalDatabasesPrototype = IDBFactory.prototype.databases;
 
-    // the follow data is taken from the fingerprint.js prototype
+    // the follow data is derived from the examples in the fingerprint.js prototype:
+    // https://github.com/fingerprintjs/blog-indexeddb-safari-leaks-demo
     const PATTERNS = [
       /offline.settings.(\d+)/, // calendar.google.com
       /offline.requests.(\d+)/,
@@ -113,7 +118,7 @@
     };
 
     IDBFactory.prototype.databases = async function () {
-      console.log('Calling IDBFactory.prototype.databases (hide well-known databases)');
+      log('Calling IDBFactory.prototype.databases (hide well-known databases)');
       const allDatabases = await originalDatabasesPrototype.apply(
         this,
         arguments,
@@ -125,8 +130,6 @@
     // to open databases cross-origin is sadly not true. Not exactly clear what
     // it does - you end up with dupicated databases - but it does not trigger
     // an error. Leaving it in for completeness, but it does not work:
-
-    console.log('Monkey patching indexedDB.databases() to accept only databases that can be openend (WARNING: this is broken)...');
     const originalDatabasesPrototype = IDBFactory.prototype.databases;
     const originalOpenPrototype = IDBFactory.prototype.open;
 
@@ -137,19 +140,13 @@
           name,
           version
         );
-        request.onsuccess = () => {
-          console.log('Successfully opened datbase:', name);
-          resolve(true);
-        };
-        request.onerror = () => {
-          console.log('Failed to open datbase:', name);
-          resolve(false);
-        };
+        request.onsuccess = () => resolve(true);
+        request.onerror = () => resolve(false);
       });
     }
 
     IDBFactory.prototype.databases = async function () {
-      console.log('Calling IDBFactory.prototype.databases (test for readable databases)');
+      log('Calling IDBFactory.prototype.databases to hide non-readable databases');
       const instanceDbInstance = this;
       const allDatabases = await originalDatabasesPrototype.apply(
         instanceDbInstance,
@@ -158,10 +155,10 @@
       const readableDatabases = await Promise.all(
         allDatabases.map(async ({ name, version }) => {
           if (await isReadable(instanceDbInstance, name, version)) {
-            console.log(`Accepting database ${name}`);
+            log(`Accepting database ${name}`);
             return { name, version };
           } else {
-            console.log(`Skipping database ${name}`);
+            log(`Skipping database ${name}`);
             return null;
           }
         }),
@@ -169,6 +166,6 @@
       return readableDatabases.filter((x) => x);
     };
   } else {
-    console.log('Unknown method: leaving everything as is');
+    log('Unknown method: leaving everything as is');
   }
 })();
