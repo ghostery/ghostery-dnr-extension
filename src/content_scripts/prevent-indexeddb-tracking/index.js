@@ -13,7 +13,8 @@
   console.debug('Load indexeddb-tracking-protection');
   const script = document.createElement('script');
   script.src = chrome.runtime.getURL(
-    'content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js');
+    'content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js',
+  );
   script.onload = function () {
     this.remove();
   };

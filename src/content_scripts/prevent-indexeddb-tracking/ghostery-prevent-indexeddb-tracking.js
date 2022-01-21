@@ -100,7 +100,8 @@
       'cbc_storage',
       'firebase-installations-database',
       'AppboyServiceWorkerAsyncStorage',
-      'firebaseLocalStorageDb', 'Braze IndexedDB Support Test',
+      'firebaseLocalStorageDb',
+      'Braze IndexedDB Support Test',
       'nerf-web',
       'wxu-web',
       'd2fb08da-1c03-4c8a-978f-ad8a96b4c31f',
@@ -114,7 +115,7 @@
     ];
 
     const shouldBeHidden = function (name) {
-      return EXACT.includes(name) || PATTERNS.some(p => p.test(name));
+      return EXACT.includes(name) || PATTERNS.some((p) => p.test(name));
     };
 
     IDBFactory.prototype.databases = async function () {
@@ -130,23 +131,26 @@
     // to open databases cross-origin is sadly not true. Not exactly clear what
     // it does - you end up with dupicated databases - but it does not trigger
     // an error. Leaving it in for completeness, but it does not work:
+
     const originalDatabasesPrototype = IDBFactory.prototype.databases;
     const originalOpenPrototype = IDBFactory.prototype.open;
 
-    function isReadable(instanceDbInstance, name, version) {
+    const isReadable = (instanceDbInstance, name, version) => {
       return new Promise((resolve) => {
         const request = originalOpenPrototype.call(
           instanceDbInstance,
           name,
-          version
+          version,
         );
         request.onsuccess = () => resolve(true);
         request.onerror = () => resolve(false);
       });
-    }
+    };
 
     IDBFactory.prototype.databases = async function () {
-      log('Calling IDBFactory.prototype.databases to hide non-readable databases');
+      log(
+        'Calling IDBFactory.prototype.databases to hide non-readable databases',
+      );
       const instanceDbInstance = this;
       const allDatabases = await originalDatabasesPrototype.apply(
         instanceDbInstance,
