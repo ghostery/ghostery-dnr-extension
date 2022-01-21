@@ -11,8 +11,8 @@
  */
 
 (function () {
-  function log(...args) {
-    console.debug('[ghostery-indexeddb-tracking-mitigation]', ...args);
+  function log(/*...args*/) {
+    //console.debug('[ghostery-prevent-indexeddb-tracking]', ...args);
   }
 
   // 'disable': remove the API (it does not exist on Firefox, so browser-independent code should be able to handle it)
@@ -129,7 +129,7 @@
   } else if (METHOD === 'try-to-open') {
     // Note: this does not work. Assuming Safari will throw an error if you try
     // to open databases cross-origin is sadly not true. Not exactly clear what
-    // it does - you end up with dupicated databases - but it does not trigger
+    // it does - you end up with duplicated databases - but it does not trigger
     // an error. Leaving it in for completeness, but it does not work:
 
     const originalDatabasesPrototype = IDBFactory.prototype.databases;
