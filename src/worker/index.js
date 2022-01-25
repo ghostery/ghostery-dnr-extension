@@ -8,24 +8,19 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import * as tldts from '/vendor/tldts/dist/index.esm.min.js';
+import tryWTMReportOnMessageHandler from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
+import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
-try {
-  // The following import must be in sync with the
-  // background scripts in the Safari manifest
-  // (see ../xcode/Shared (Extension)/specific/manifest.json)
-  importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
-  importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
-  importScripts('../vendor/@whotracksme/serp-report/src/background/data.js');
-  importScripts('../vendor/@whotracksme/serp-report/src/background/index.js');
-  importScripts('../vendor/@whotracksme/tracker-wheel/src/index.js');
-  importScripts('./lodash-debounce.js');
-  importScripts('./adblocker.js');
-  importScripts('./storage.js');
-  importScripts('./bugs-matcher.js');
-  importScripts('./tab-stats.js');
-} catch (e) {
-  // on Safari those have to be imported from manifest.json
-}
+import * as _ from './lodash-debounce.js';
+
+import storage from './storage.js';
+import isBug from './bugs-matcher.js';
+import tabStats from './tab-stats.js';
+import {
+  adblockerOnMessage,
+  updateAdblockerEngineStatuses,
+} from './adblocker.js';
 
 function getTrackerFromUrl(url, origin) {
   try {
@@ -135,7 +130,7 @@ function userNavigatedToNewPage({ tabId, frameId, url }) {
 
 chrome.webNavigation.onCommitted.addListener(userNavigatedToNewPage);
 
-chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
+chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
