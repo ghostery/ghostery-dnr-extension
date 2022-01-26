@@ -8,7 +8,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import * as tldts from '/vendor/tldts/dist/index.esm.min.js';
+
+// For now, we need to load "tldts" UMD module to get it in the global scope,
+// especially for the `serp-report` module.
+import '/vendor/tldts/dist/index.umd.min.js';
+
 import tryWTMReportOnMessageHandler from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
@@ -21,6 +25,9 @@ import {
   adblockerOnMessage,
   updateAdblockerEngineStatuses,
 } from './adblocker.js';
+
+// Here we have to load the tldts from the global scope
+const tldts = globalThis.tldts;
 
 function getTrackerFromUrl(url, origin) {
   try {

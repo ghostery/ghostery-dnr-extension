@@ -58,8 +58,8 @@
       "to": "src/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js.map"
     },
     {
-      "from": "node_modules/tldts/dist/index.esm.min.js",
-      "to": "src/vendor/tldts/dist/index.esm.min.js"
+      "from": "node_modules/tldts/dist/index.umd.min.js",
+      "to": "src/vendor/tldts/dist/index.umd.min.js"
     },
     {
       "from": "../ghostery-dnr-lists/build",
