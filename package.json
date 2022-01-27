@@ -29,7 +29,7 @@
   "dependencies": {
     "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@whotracksme/webextension-packages": "github:whotracksme/webextension-packages#feat-refactor",
+    "@whotracksme/webextension-packages": "^0.1.0",
     "hybrids": "^6.1.0",
     "tldts": "^5.7.45"
   },
