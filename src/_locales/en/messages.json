@@ -310,6 +310,9 @@
 	"category_uncategorized_desc": {
 		"message": "These trackers have not been categorized yet."
 	},
+	"category_unknown": {
+		"message": "Unknown"
+	},
 	"click2play_allow_always_tooltip": {
 		"description": "Tooltip that appears over the 'allow always' click2play button.",
 		"message": "Allow and reload."
