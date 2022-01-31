@@ -8,17 +8,17 @@
   "default_locale": "en",
   "description": "__MSG_short_description__",
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
   },
   "action": {
     "default_icon": {
-      "16": "images/icon16.png",
-      "24": "images/icon19.png",
-      "32": "images/icon38.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "16": "assets/images/icon16.png",
+      "24": "assets/images/icon19.png",
+      "32": "assets/images/icon38.png",
+      "48": "assets/images/icon48.png",
+      "128": "assets/images/icon128.png"
     },
     "default_title": "Ghostery",
     "default_popup": "panel/index.html"
@@ -474,17 +474,17 @@
       {
         "id": "ads_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-ads-network.json"
+        "path": "assets/rule_resources/dnr-ads-network.json"
       },
       {
         "id": "tracking_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-tracking-network.json"
+        "path": "assets/rule_resources/dnr-tracking-network.json"
       },
       {
         "id": "annoyances_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-annoyances-network.json"
+        "path": "assets/rule_resources/dnr-annoyances-network.json"
       }
     ]
   },
