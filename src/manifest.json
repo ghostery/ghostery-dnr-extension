@@ -466,7 +466,7 @@
     "wss://*/*"
   ],
   "background": {
-    "service_worker": "worker/index.js",
+    "service_worker": "background/index.js",
     "type": "module"
   },
   "declarative_net_request" : {

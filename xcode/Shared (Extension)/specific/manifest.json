@@ -470,7 +470,7 @@
     "wss://*/*"
   ],
   "background": {
-    "page": "worker/background.html",
+    "page": "background.html",
     "persistent": false
   },
   "declarative_net_request" : {
