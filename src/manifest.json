@@ -21,9 +21,9 @@
       "128": "assets/images/icon128.png"
     },
     "default_title": "Ghostery",
-    "default_popup": "panel/index.html"
+    "default_popup": "pages/panel/index.html"
   },
-  "options_page": "options/index.html",
+  "options_page": "pages/options/index.html",
   "content_scripts": [
     {
       "matches": ["*://*/*"],
