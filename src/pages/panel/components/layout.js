@@ -47,6 +47,7 @@ export default define({
       flex: 1 1 auto;
       padding: 12px;
       overflow-y: auto;
+      overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       box-sizing: border-box;
     }
@@ -61,8 +62,12 @@ export default define({
     }
     
     footer a {
-      white-space: nowrap;
       cursor: pointer;
+      text-align: left;
+    }
+
+    footer a:last-child {
+      text-align: right;
     }
     
     footer .dot {
