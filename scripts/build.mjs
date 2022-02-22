@@ -22,30 +22,11 @@ const argv = process.argv.slice(2).reduce((acc, arg, index, arr) => {
 }, {});
 
 const manifest = JSON.parse(
-  readFileSync(resolve(options.srcDir, 'manifest.json'), 'utf8'),
+  readFileSync(
+    resolve(options.srcDir, `manifest.${argv.target || 'chromium'}.json`),
+    'utf8',
+  ),
 );
-
-// Map the manifest to v2 if the build target is set to "safari"
-if (argv.target === 'safari') {
-  manifest.manifest_version = 2;
-
-  manifest.browser_action = manifest.action;
-  delete manifest.action;
-
-  if (manifest.background) {
-    manifest.background = {
-      'page': 'background/background.html',
-      'persistent': false,
-    };
-  }
-
-  manifest.web_accessible_resources = manifest.web_accessible_resources?.reduce(
-    (acc, entry) => {
-      return acc.concat(entry.resources);
-    },
-    [],
-  );
-}
 
 const config = {
   configFile: false,
