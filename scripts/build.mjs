@@ -197,7 +197,7 @@ for (const [key, value] of Object.entries(mapPaths(content_scripts))) {
     ...config,
     build: {
       ...config.build,
-      target: 'es2015',
+      target: 'esnext',
       rollupOptions: {
         input: { [key]: value },
         output: {
