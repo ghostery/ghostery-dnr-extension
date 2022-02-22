@@ -471,7 +471,7 @@
   ],
   "background": {
     "page": "background/background.html",
-    "persist": false
+    "persistent": false
   },
   "declarative_net_request" : {
     "rule_resources" : [

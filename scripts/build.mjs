@@ -150,9 +150,9 @@ if (manifest.background) {
 
 function mapPaths(paths) {
   return paths.reduce((acc, src) => {
-    acc[src] = resolve(
-      src.startsWith('node_modules') ? src : resolve(options.srcDir, src),
-    );
+    acc[src] = src.startsWith('node_modules')
+      ? resolve(src)
+      : resolve(options.srcDir, src);
     return acc;
   }, {});
 }
@@ -192,14 +192,14 @@ await build({
 
 // --- Build content scripts ---
 
-for (const [key, value] of Object.entries(mapPaths(content_scripts))) {
+for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
   await build({
     ...config,
     build: {
       ...config.build,
       target: 'esnext',
       rollupOptions: {
-        input: { [key]: value },
+        input: { [id]: path },
         output: {
           format: value.endsWith('.css') ? 'es' : 'iife',
           dir: options.outDir,
