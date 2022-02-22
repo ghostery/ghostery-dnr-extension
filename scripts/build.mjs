@@ -32,11 +32,14 @@ if (argv.target === 'safari') {
   manifest.browser_action = manifest.action;
   delete manifest.action;
 
-  manifest.background = {
-    'page': 'background/background.html',
-    'persistent': false,
-  };
-  manifest.web_accessible_resources = manifest.web_accessible_resources.reduce(
+  if (manifest.background) {
+    manifest.background = {
+      'page': 'background/background.html',
+      'persistent': false,
+    };
+  }
+
+  manifest.web_accessible_resources = manifest.web_accessible_resources?.reduce(
     (acc, entry) => {
       return acc.concat(entry.resources);
     },
@@ -144,7 +147,7 @@ if (manifest.options_page) {
 }
 
 // content scripts
-manifest.content_scripts.forEach(({ js = [], css = [] }) => {
+manifest.content_scripts?.forEach(({ js = [], css = [] }) => {
   [...js, ...css].forEach((src) => content_scripts.push(src));
 });
 
