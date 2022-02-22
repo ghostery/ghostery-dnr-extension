@@ -5,9 +5,9 @@
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "preinstall": "rimraf src/vendor src/assets/rule_resources",
     "postinstall": "vendor-copy && npm run download-cosmetics",
-    "build": "vite build",
-    "build.chromium": "npm run build -- --mode chromium",
-    "build.safari": "npm run build -- --mode safari",
+    "build": "node scripts/build.mjs",
+    "build.chromium": "npm run build -- --target chromium",
+    "build.safari": "npm run build -- --target safari",
     "dev": "npm run build.chromium -- --watch",
     "release": "web-ext build",
     "start": "web-ext run --target=chromium",
@@ -43,44 +43,12 @@
   },
   "vendorCopy": [
     {
-      "from": "node_modules/hybrids/src",
-      "to": "src/vendor/hybrids/src"
-    },
-    {
-      "from": "node_modules/@cliqz/adblocker/dist/adblocker.umd.min.js",
-      "to": "src/vendor/@cliqz/adblocker/adblocker.umd.min.js"
-    },
-    {
-      "from": "node_modules/@cliqz/adblocker/dist/adblocker.umd.min.js.map",
-      "to": "src/vendor/@cliqz/adblocker/adblocker.umd.min.js.map"
-    },
-    {
-      "from": "node_modules/@cliqz/adblocker-webextension-cosmetics/dist/adblocker.umd.min.js",
-      "to": "src/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js"
-    },
-    {
-      "from": "node_modules/@cliqz/adblocker-webextension-cosmetics/dist/adblocker.umd.min.js.map",
-      "to": "src/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js.map"
-    },
-    {
-      "from": "node_modules/tldts/dist/index.umd.min.js",
-      "to": "src/vendor/tldts/dist/index.umd.min.js"
-    },
-    {
       "from": "../ghostery-dnr-lists/build",
       "to": "src/assets/rule_resources"
     },
     {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/prevent-serp-tracking/src",
-      "to": "src/vendor/@whotracksme/prevent-serp-tracking/src"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report/src",
-      "to": "src/vendor/@whotracksme/serp-report/src"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/ui/src",
-      "to": "src/vendor/@whotracksme/ui/src"
+      "from": "node_modules/@whotracksme/webextension-packages/packages",
+      "to": "src/vendor/@whotracksme"
     }
   ]
 }

@@ -86,8 +86,6 @@
 		B469CA9527BE924D00408C43 /* pages in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8727BE924D00408C43 /* pages */; };
 		B469CA9627BE924D00408C43 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8827BE924D00408C43 /* _locales */; };
 		B469CA9727BE924D00408C43 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8827BE924D00408C43 /* _locales */; };
-		B469CA9827BE924D00408C43 /* common in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8927BE924D00408C43 /* common */; };
-		B469CA9927BE924D00408C43 /* common in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8927BE924D00408C43 /* common */; };
 		B469CA9B27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
 		B469CA9C27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
 /* End PBXBuildFile section */
@@ -187,7 +185,6 @@
 		B469CA8627BE924D00408C43 /* content_scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content_scripts; path = ../../dist/content_scripts; sourceTree = "<group>"; };
 		B469CA8727BE924D00408C43 /* pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pages; path = ../../dist/pages; sourceTree = "<group>"; };
 		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
-		B469CA8927BE924D00408C43 /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = ../../dist/common; sourceTree = "<group>"; };
 		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -414,7 +411,6 @@
 				B469CA8827BE924D00408C43 /* _locales */,
 				B469CA8527BE924D00408C43 /* assets */,
 				B469CA8427BE924D00408C43 /* background */,
-				B469CA8927BE924D00408C43 /* common */,
 				B469CA8627BE924D00408C43 /* content_scripts */,
 				B469CA8227BE924D00408C43 /* node_modules */,
 				B469CA8727BE924D00408C43 /* pages */,
@@ -592,7 +588,6 @@
 				B469CA9B27BE949000408C43 /* manifest.json in Resources */,
 				B469CA8A27BE924D00408C43 /* node_modules in Resources */,
 				B469CA8E27BE924D00408C43 /* background in Resources */,
-				B469CA9827BE924D00408C43 /* common in Resources */,
 				B469CA9227BE924D00408C43 /* content_scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,7 +603,6 @@
 				B469CA9C27BE949000408C43 /* manifest.json in Resources */,
 				B469CA8B27BE924D00408C43 /* node_modules in Resources */,
 				B469CA8F27BE924D00408C43 /* background in Resources */,
-				B469CA9927BE924D00408C43 /* common in Resources */,
 				B469CA9327BE924D00408C43 /* content_scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
