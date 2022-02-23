@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
-import { execSync } from 'child_process';
 import { build } from 'vite';
+import shelljs from 'shelljs';
 
 const pwd = process.cwd();
 
@@ -95,12 +95,17 @@ const config = {
 // --- Generate dist structure ---
 
 // generate dist folder
-execSync(`rm -rf ${options.outDir} && mkdir -p ${options.outDir}`);
+shelljs.rm('-rf', options.outDir);
+shelljs.mkdir('-p', options.outDir);
 
 // copy static assets
 options.assets.forEach((path) => {
-  execSync(`mkdir -p ${options.outDir}/${path}`);
-  execSync(`cp -r ${options.srcDir}/${path}/* ${options.outDir}/${path}`);
+  shelljs.mkdir('-p', resolve(options.outDir, path));
+  shelljs.cp(
+    '-r',
+    resolve(options.srcDir, path, '*'),
+    resolve(options.outDir, path),
+  );
 });
 
 // Save manifest
@@ -201,7 +206,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
       rollupOptions: {
         input: { [id]: path },
         output: {
-          format: value.endsWith('.css') ? 'es' : 'iife',
+          format: path.endsWith('.css') ? 'es' : 'iife',
           dir: options.outDir,
           entryFileNames: (chunkInfo) => {
             if (chunkInfo.facadeModuleId.endsWith('.css')) {

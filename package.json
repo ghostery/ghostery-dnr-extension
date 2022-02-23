@@ -27,6 +27,7 @@
     "node-fetch": "^2.6.5",
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
+    "shelljs": "^0.8.5",
     "vendor-copy": "^3.0.1",
     "vite": "^2.8.2",
     "web-ext": "^6.4.0"
