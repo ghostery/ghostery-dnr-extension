@@ -149,10 +149,6 @@ manifest.web_accessible_resources?.forEach((entry) => {
 // background
 if (manifest.background) {
   source.push(manifest.background.service_worker || manifest.background.page);
-  // TODO: this is not elegant but necessary as only script type=module can be bundled
-  if (manifest.background.page) {
-    content_scripts.push('background/stub.js');
-  }
 }
 
 // --- Build  ---
