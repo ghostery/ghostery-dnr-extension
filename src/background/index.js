@@ -27,6 +27,8 @@ import {
   updateAdblockerEngineStatuses,
 } from './adblocker.js';
 
+import './autoconsent.js';
+
 function getTrackerFromUrl(url, origin) {
   try {
     const bugId = isBug(url);

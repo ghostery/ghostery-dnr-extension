@@ -47,6 +47,13 @@
       ]
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": [
+        "content_scripts/autoconsent.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -496,6 +503,7 @@
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
     "vendor/@whotracksme/ui/src/tracker-wheel.js",
-    "vendor/@whotracksme/serp-report/src/pages/iframe/index.html"
+    "vendor/@whotracksme/serp-report/src/pages/iframe/index.html",
+    "node_modules/@cliqz/autoconsent/rules/rules.json"
   ]
 }

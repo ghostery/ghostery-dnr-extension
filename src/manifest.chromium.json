@@ -40,6 +40,13 @@
       ]
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_end",
+      "js": [
+        "content_scripts/autoconsent.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -491,7 +498,8 @@
     {
       "resources": [
         "content_scripts/whotracksme/ghostery-whotracksme.js",
-        "vendor/@whotracksme/ui/src/tracker-wheel.js"
+        "vendor/@whotracksme/ui/src/tracker-wheel.js",
+        "node_modules/@cliqz/autoconsent/rules/rules.json"
       ],
       "all_frames": true,
       "matches": [
