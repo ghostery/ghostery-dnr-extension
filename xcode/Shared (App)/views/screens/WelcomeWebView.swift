@@ -26,12 +26,12 @@ struct WelcomeWebView {
         let userContentHelper = WebViewUserContentHelper(openInWebView: openInWebView, openSubscriptions: openSubscriptions)
 
         webView.navigationDelegate = navigationHelper
-
         webView.configuration.userContentController.add(userContentHelper, name: "controller")
 
 
         #if os(iOS)
             webView.scrollView.isScrollEnabled = false
+            webView.scrollView.contentInsetAdjustmentBehavior = .never
         #endif
 
 

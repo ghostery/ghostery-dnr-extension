@@ -12,7 +12,6 @@
 html,
 body {
   height: 100%;
-  background-color: #2f3136;
   margin: 0;
 }
 
@@ -25,11 +24,8 @@ body {
   font-size: 18px;
   text-align: center;
   text-transform: uppercase;
-  color: #aaa;
-}
-
-body.platform-mac {
   background: linear-gradient(162deg, #2f3136 10%, #0d1014 100%);
+  color: white;
 }
 
 body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
@@ -50,7 +46,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  max-height: 890px;
+  max-height: 720px;
   height: 100%;
 }
 
@@ -61,8 +57,7 @@ p {
 }
 
 img.logo {
-  padding: 36px 0 16px;
-  margin-right: -33px;
+  padding: 36px 0 22px;
 }
 
 h1 {
@@ -79,14 +74,21 @@ h1 .small {
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+h2 .small {
+  font-size: 16px;
+  font-weight: 400;
+  color: #aaa;
 }
 
 button {
   display: block;
-  margin: 10px auto;
-  padding: 18px 50px;
+  margin: 18px auto;
+  padding: 14px 50px;
   border: none;
   border-radius: 50px;
   background-color: #00aef0;
@@ -99,11 +101,10 @@ button {
 }
 
 button.outline {
-  background: transparent;
+  background: transparent url('./ArrowRight.svg') no-repeat right center;
   color: #00aef0;
-  border: 2px solid #00aef0;
-  font-size: 16px;
-  padding: 10px 26px;
+  font-size: 18px;
+  padding: 2px 30px 2px 0px;
 }
 
 section {
@@ -112,6 +113,11 @@ section {
 
 section:last-child {
   padding-bottom: 24px;
+}
+
+#enjoying-ghostery {
+  background: url('./GlowingArch.svg') no-repeat top center;
+  padding-top: 56px;
 }
 
 #ios-settings-path {
@@ -135,8 +141,11 @@ section:last-child {
 }
 
 #protected {
-  font-size: 28px;
+  font-size: 24px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #00aef0;
+}
+
+#button-help {
+  margin: -8px auto 20px;
 }

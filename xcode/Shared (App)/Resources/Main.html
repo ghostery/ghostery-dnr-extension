@@ -2,8 +2,6 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'" /> -->
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
@@ -20,21 +18,7 @@
   <body>
     <main>
       <section>
-        <img
-          class="logo state-off"
-          src="./GhosteryDisabled.svg"
-          alt="Ghostery Disabled"
-        />
-        <img
-          class="logo state-on"
-          src="./GhosteryEnabled.svg"
-          alt="Ghostery Enabled"
-        />
-        <img
-          class="logo state-unknown"
-          src="./GhosteryEnabled.svg"
-          alt="Ghostery Enabled"
-        />
+        <img class="logo" src="./GhosteryLogo.svg" alt="Ghostery Disabled" />
         <h1>
           Privacy Ad Blocker <br />
           <span class="small">is a Safari Extension</span>
@@ -63,17 +47,20 @@
       </section>
 
       <section class="platform-mac state-on" id="protected">
+        <p><img src="./GreenCheck.svg" alt="Green Check" /></p>
         <p>You are protected</p>
       </section>
 
-      <section>
-        <h2>Enjoying Ghostery?</h2>
+      <section id="enjoying-ghostery">
+        <h2>
+          Enjoying Ghostery? <br />
+          <span class="small">Support what we do</span>
+        </h2>
         <button id="button-subscribe">Subscribe now</button>
-        <p>To support what we do</p>
       </section>
 
       <section>
-        <p>Need help?</p>
+        <h2><span class="small">Need help?</span></h2>
         <button id="button-help" class="outline">Contact our support</button>
       </section>
     </main>
