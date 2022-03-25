@@ -16,22 +16,19 @@ const pkg = JSON.parse(
   await readFile(new URL('../package-lock.json', import.meta.url)),
 );
 
-const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version.replace(
-  /\.[0-9]+$/,
-  '',
-);
+const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;
 const distPath = 'src/assets/adblocker_engines';
 
 // Ad rules
 const adList = await fetch(
-  'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-ads/allowed-lists.json',
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-ads/allowed-lists.json',
 ).then((res) => res.json());
 
 // Ad Cosmetic rules
 
 const adCosmeticEngine = Object.values(adList.engines).find((e) =>
   e.url.startsWith(
-    `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
   ),
 );
 
@@ -46,13 +43,13 @@ writeFileSync(
 // Tracking rules
 
 const trackingList = await fetch(
-  'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-tracking/allowed-lists.json',
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-tracking/allowed-lists.json',
 ).then((res) => res.json());
 
 // Tracking Consmetic rules
 const trackingConsmeticEngine = Object.values(trackingList.engines).find((e) =>
   e.url.startsWith(
-    `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
   ),
 );
 
@@ -67,7 +64,7 @@ writeFileSync(
 // Annoyances rules
 
 const annoyancesList = await fetch(
-  'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-annoyances/allowed-lists.json',
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-annoyances/allowed-lists.json',
 ).then((res) => res.json());
 
 // Tracking Cosmetic rules
@@ -75,7 +72,7 @@ const annoyancesList = await fetch(
 const annoyancesCosmeticEngine = Object.values(annoyancesList.engines).find(
   (e) =>
     e.url.startsWith(
-      `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+      `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
     ),
 );
 
