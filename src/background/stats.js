@@ -30,7 +30,11 @@ async function send(protocol) {
   const data = await chrome.storage.local.get([STORAGE_KEY]);
   const now = Date.now();
 
-  if (data[STORAGE_KEY] && data[STORAGE_KEY].sentAt + HOUR > now) {
+  const updateSentAt = () =>
+    chrome.storage.local.set({ [STORAGE_KEY]: { sentAt: now } });
+
+  if (!data[STORAGE_KEY] || data[STORAGE_KEY].sentAt + HOUR > now) {
+    await updateSentAt();
     return;
   }
 
@@ -49,7 +53,7 @@ async function send(protocol) {
     payload: { t, ctry },
   });
 
-  await chrome.storage.local.set({ [STORAGE_KEY]: { sentAt: now } });
+  await updateSentAt();
 }
 
 (async function setupStats() {
