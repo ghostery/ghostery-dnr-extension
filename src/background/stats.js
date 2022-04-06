@@ -20,6 +20,7 @@ const SERVER_URL = 'https://anonymous-communication.ghostery.net';
 const CONFIG_URL = 'https://api.ghostery.net/api/v1/config';
 const PUBLIC_KEYS_INDEXED_DB = 'anonymous-communication-public-keys';
 const STORAGE_KEY = 'anonymous-communication-stats';
+const HOUR = 1000 * 60 * 60;
 
 async function send(protocol) {
   const now = getTrustedUtcTime();
@@ -27,8 +28,9 @@ async function send(protocol) {
   const t = getTimeAsYYYYMMDDHH(now);
 
   const data = await chrome.storage.local.get([STORAGE_KEY]);
+  const sentAt = Date.now();
 
-  if (t <= data[STORAGE_KEY].sentAt) {
+  if (data[STORAGE_KEY] && sentAt + HOUR <= data[STORAGE_KEY].sentAt) {
     return;
   }
 
@@ -47,7 +49,7 @@ async function send(protocol) {
     payload: { t, ctry },
   });
 
-  await chrome.storage.local.set({ [STORAGE_KEY]: { sentAt: t } });
+  await chrome.storage.local.set({ [STORAGE_KEY]: { sentAt } });
 }
 
 (async function setupStats() {
