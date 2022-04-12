@@ -21,7 +21,7 @@ import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
 import Options from '/store/options.js';
 
-import rules from './rules.js';
+import trackers from './trackers.js';
 import isBug from './bugs-matcher.js';
 import tabStats from './tab-stats.js';
 import {
@@ -38,7 +38,7 @@ function getTrackerFromUrl(url, origin) {
     let tracker = null;
 
     if (bugId) {
-      const { bugs, apps } = rules.get('bugs');
+      const { bugs, apps } = trackers.get('bugs');
       const appId = bugs[bugId].aid;
       const app = apps[appId];
       trackerId = app.trackerID;
@@ -54,15 +54,15 @@ function getTrackerFromUrl(url, origin) {
         return null;
       }
 
-      trackerId = rules.get('tracker_domains')[domain];
+      trackerId = trackers.get('tracker_domains')[domain];
     }
 
     if (trackerId) {
-      if (rules.get('trackers')[trackerId]) {
-        tracker = rules.get('trackers')[trackerId];
+      if (trackers.get('trackers')[trackerId]) {
+        tracker = trackers.get('trackers')[trackerId];
       }
       if (!tracker.category && tracker.category_id) {
-        tracker.category = rules.get('categories')[tracker.category_id];
+        tracker.category = trackers.get('categories')[tracker.category_id];
       }
       return tracker;
     }
