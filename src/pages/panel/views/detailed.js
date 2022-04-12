@@ -10,8 +10,8 @@
  */
 
 import { html, define, store, router } from 'hybrids';
-import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 import { chevronLeft } from '/vendor/@whotracksme/ui/src/components/icons.js';
 

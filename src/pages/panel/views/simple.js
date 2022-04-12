@@ -17,10 +17,10 @@ import {
   chevronRight,
 } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
-import sites from '../../../rule_resources/sites.json';
+import sites from '/rule_resources/sites.json';
 
 import Stats from '/store/stats.js';
-import Rulesets, { rulesetIds } from '../../../store/rulesets.js';
+import Rulesets, { rulesetIds } from '/store/rulesets.js';
 
 import Detailed from './detailed.js';
 

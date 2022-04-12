@@ -9,10 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '/vendor/@whotracksme/ui/src/components/category-bullet.js';
-import '/vendor/@whotracksme/ui/src/components/panel-header.js';
-import '/vendor/@whotracksme/ui/src/components/wtm-stats.js';
-
-import '/ui/index.js';
-
-import './views/app.js';
+import './category-with-trackers.js';
+import './icon.js';
+import './layout.js';
+import './page-load.js';
+import './toggle-switch.js';
