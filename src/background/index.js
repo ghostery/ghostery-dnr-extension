@@ -19,7 +19,7 @@ import {
 
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
-import Options from '/store/options.js';
+import Options, { isUpdateOptionsMessage } from '/store/options.js';
 
 import trackers from './trackers.js';
 import isBug from './bugs-matcher.js';
@@ -132,8 +132,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
+// Initialize the value of the options upfront
+store.get(Options);
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'dnrUpdate') {
+  if (isUpdateOptionsMessage(msg)) {
     updateAdblockerEngineStatuses();
     return false;
   }
@@ -188,7 +191,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    if (!options.trackerWheelDisabled) {
+    if (store.ready(options) && !options.trackerWheelDisabled) {
       // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
       // If we render the icon, it will be empty. The if-guard has the
       // effect that in most cases, you will see Ghosty as the icon.
@@ -201,7 +204,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (options.wtmSerpReport ?? true) {
+  if ((store.ready(options) && options.wtmSerpReport) ?? true) {
     if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
       return false;
     }
