@@ -20,7 +20,7 @@ import {
 import sites from '/rule_resources/sites.json';
 
 import Stats from '/store/stats.js';
-import Options from '/store/options.js';
+import Options, { DNR_IDS } from '/store/options.js';
 
 import Detailed from './detailed.js';
 
@@ -44,7 +44,7 @@ export default define({
 
     <section class="toggles">
       ${store.ready(options) &&
-      Object.keys(options.dnr).map(
+      DNR_IDS.map(
         (ruleset) =>
           html`<gh-panel-toggle-switch
             name="${ruleset}"

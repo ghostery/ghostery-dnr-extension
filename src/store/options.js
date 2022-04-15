@@ -17,14 +17,14 @@ export function isUpdateOptionsMessage(message) {
   return message?.action === UPDATE_ACTION_NAME;
 }
 
-const rulesetIds = chrome.runtime
+export const DNR_IDS = chrome.runtime
   .getManifest()
   .declarative_net_request.rule_resources.map((r) => r.id);
 
 const Options = {
   trackerWheelDisabled: false,
   wtmSerpReport: true,
-  dnr: rulesetIds.reduce((all, rule) => ({ ...all, [rule]: false }), {}),
+  dnr: DNR_IDS.reduce((all, rule) => ({ ...all, [rule]: false }), {}),
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
@@ -64,7 +64,7 @@ const Options = {
 
       // Update declarativeNetRequest rulesets
       if (keys.includes('dnr')) {
-        rulesetIds.forEach((rule) => {
+        DNR_IDS.forEach((rule) => {
           const enabled = options.dnr[rule];
           if (enabled !== prevOptions.dnr[rule]) {
             chrome.declarativeNetRequest.updateEnabledRulesets({
@@ -91,11 +91,8 @@ export default Options;
 
 chrome.runtime.onMessage.addListener((message) => {
   if (isUpdateOptionsMessage(message)) {
-    const options = store.get(Options);
-    if (store.ready(options)) {
-      store.clear(options);
-      store.get(Options);
-    }
+    store.clear(Options, false);
+    store.get(Options);
   }
 
   return false;

@@ -191,7 +191,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    if (store.ready(options) && !options.trackerWheelDisabled) {
+    if (!options.trackerWheelDisabled) {
       // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
       // If we render the icon, it will be empty. The if-guard has the
       // effect that in most cases, you will see Ghosty as the icon.
@@ -204,7 +204,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if ((store.ready(options) && options.wtmSerpReport) ?? true) {
+  if (options.wtmSerpReport ?? true) {
     if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
       return false;
     }
