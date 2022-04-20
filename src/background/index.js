@@ -215,6 +215,5 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
   }
 
-  adblockerOnMessage(msg, sender, sendResponse);
-  return false;
+  return adblockerOnMessage(msg, sender, sendResponse);
 });
