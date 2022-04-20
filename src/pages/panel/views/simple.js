@@ -27,7 +27,7 @@ import Detailed from './detailed.js';
 function toggleRuleset(ruleset) {
   return (host) => {
     store.set(host.options, {
-      dnr: {
+      dnrRules: {
         [ruleset]: !host.options.dnrRules[ruleset],
       },
     });
