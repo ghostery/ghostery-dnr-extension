@@ -24,7 +24,7 @@ export const DNR_IDS = chrome.runtime
 const Options = {
   trackerWheelDisabled: false,
   wtmSerpReport: true,
-  dnr: DNR_IDS.reduce((all, rule) => ({ ...all, [rule]: true }), {}),
+  dnrRules: DNR_IDS.reduce((all, rule) => ({ ...all, [rule]: true }), {}),
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
@@ -48,7 +48,7 @@ const Options = {
         await chrome.declarativeNetRequest.getEnabledRulesets();
 
       DNR_IDS.forEach((rule) => {
-        const enabled = options.dnr[rule];
+        const enabled = options.dnrRules[rule];
         if (enabled !== enabledRulesetIds.includes(rule)) {
           chrome.declarativeNetRequest.updateEnabledRulesets({
             [enabled ? 'enableRulesetIds' : 'disableRulesetIds']: [rule],

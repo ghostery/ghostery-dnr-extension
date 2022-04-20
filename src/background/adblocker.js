@@ -26,7 +26,7 @@ export async function updateAdblockerEngineStatuses() {
   const options = await store.resolve(store.get(Options));
 
   DNR_IDS.forEach((key) => {
-    adblockerEngines[key].isEnabled = options.dnr[key];
+    adblockerEngines[key].isEnabled = options.dnrRules[key];
   });
 }
 

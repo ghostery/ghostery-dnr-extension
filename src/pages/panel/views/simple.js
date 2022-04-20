@@ -28,7 +28,7 @@ function toggleRuleset(ruleset) {
   return (host) => {
     store.set(host.options, {
       dnr: {
-        [ruleset]: !host.options.dnr[ruleset],
+        [ruleset]: !host.options.dnrRules[ruleset],
       },
     });
   };
@@ -48,7 +48,7 @@ export default define({
         (ruleset) =>
           html`<gh-panel-toggle-switch
             name="${ruleset}"
-            disabled="${!options.dnr[ruleset]}"
+            disabled="${!options.dnrRules[ruleset]}"
             onclick=${toggleRuleset(ruleset)}
           ></gh-panel-toggle-switch>`,
       )}
