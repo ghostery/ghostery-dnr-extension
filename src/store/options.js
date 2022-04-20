@@ -32,14 +32,13 @@ const Options = {
     },
     async set(_, options) {
       await chrome.storage.local.set({ options });
+
+      // Send update message to another contexts (background page / panel / options)
+      await chrome.runtime.sendMessage({ action: UPDATE_ACTION_NAME });
+
       return options;
     },
     async observe(id, options) {
-      // Send update message to another contexts (background page / panel / options)
-      chrome.runtime.sendMessage({
-        action: UPDATE_ACTION_NAME,
-      });
-
       // Ensure that DNR rulesets are equal to those from options.
       // eg. when web extension updates, the rulesets are reset
       // to the value from the manifest.
@@ -75,8 +74,12 @@ export default Options;
 
 chrome.runtime.onMessage.addListener((message) => {
   if (isUpdateOptionsMessage(message)) {
-    store.clear(Options, false);
-    store.get(Options);
+    const options = store.get(Options);
+
+    if (!store.pending(options)) {
+      store.clear(options, false);
+      store.get(Options);
+    }
   }
 
   return false;
