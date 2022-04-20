@@ -17,12 +17,15 @@ export function isUpdateOptionsMessage(message) {
   return message?.action === UPDATE_ACTION_NAME;
 }
 
-export const DNR_IDS = chrome.runtime
+export const DNR_RULES_LIST = chrome.runtime
   .getManifest()
   .declarative_net_request.rule_resources.map((r) => r.id);
 
 const Options = {
-  dnrRules: DNR_IDS.reduce((all, rule) => ({ ...all, [rule]: true }), {}),
+  dnrRules: DNR_RULES_LIST.reduce(
+    (all, rule) => ({ ...all, [rule]: true }),
+    {},
+  ),
   trackerWheelDisabled: false,
   wtmSerpReport: true,
   [store.connect]: {
@@ -49,7 +52,7 @@ const Options = {
       const enableRulesetIds = [];
       const disableRulesetIds = [];
 
-      DNR_IDS.forEach((rule) => {
+      DNR_RULES_LIST.forEach((rule) => {
         const enabled = options.dnrRules[rule];
         if (enabled !== enabledRulesetIds.includes(rule)) {
           if (enabled) {

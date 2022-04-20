@@ -12,9 +12,9 @@
 import { FiltersEngine } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
-import Options, { DNR_IDS } from '/store/options.js';
+import Options, { DNR_RULES_LIST } from '/store/options.js';
 
-const adblockerEngines = DNR_IDS.reduce((map, name) => {
+const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
   map[name] = {
     engine: null,
     isEnabled: false,
@@ -25,7 +25,7 @@ const adblockerEngines = DNR_IDS.reduce((map, name) => {
 export async function updateAdblockerEngineStatuses() {
   const options = await store.resolve(store.get(Options));
 
-  DNR_IDS.forEach((key) => {
+  DNR_RULES_LIST.forEach((key) => {
     adblockerEngines[key].isEnabled = options.dnrRules[key];
   });
 }
