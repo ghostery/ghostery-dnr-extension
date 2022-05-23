@@ -181,7 +181,6 @@
 		468E42842701F84A008B5792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		468E42932701F84A008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		468E42982701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E429F2701F84A008B5792 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
@@ -208,6 +207,7 @@
 		B469CA8727BE924D00408C43 /* pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pages; path = ../../dist/pages; sourceTree = "<group>"; };
 		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
 		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
+		B4D0FE45283B9CE80036C80F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4D49C6F28045EFC00277CCA /* store */ = {isa = PBXFileReference; lastKnownFileType = folder; name = store; path = ../../dist/store; sourceTree = "<group>"; };
 		B4FFD50127F73B820041049C /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../dist/rule_resources; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -563,7 +563,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 468E42772701F848008B5792;
 			packageReferences = (
@@ -751,7 +750,7 @@
 		468E42922701F84A008B5792 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				468E42932701F84A008B5792 /* Base */,
+				B4D0FE45283B9CE80036C80F /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
