@@ -30,6 +30,7 @@ import {
 } from './adblocker.js';
 
 import './stats.js';
+import './malware.js';
 
 function getTrackerFromUrl(url, origin) {
   try {
