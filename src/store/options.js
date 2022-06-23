@@ -71,6 +71,7 @@ const Options = {
 
 export default Options;
 
+const observers = new Set();
 export async function observe(property, fn) {
   let value;
   const wrapperFn = (options) => {
@@ -80,18 +81,16 @@ export async function observe(property, fn) {
     }
   };
 
-  // Add listener for options updates
-  chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
-      wrapperFn(msg.options);
-    }
-
-    return false;
-  });
+  observers.add(wrapperFn);
 
   // Run for the first time with the current options
   const options = await store.resolve(store.get(Options));
   wrapperFn(options);
+
+  // Return unobserve function
+  return () => {
+    observers.delete(wrapperFn);
+  };
 }
 
 chrome.runtime.onMessage.addListener((msg) => {
@@ -102,6 +101,8 @@ chrome.runtime.onMessage.addListener((msg) => {
       store.clear(options, false);
       store.get(Options);
     }
+
+    observers.forEach((observer) => observer(msg.options));
   }
 
   return false;
