@@ -102,7 +102,13 @@ chrome.runtime.onMessage.addListener((msg) => {
       store.get(Options);
     }
 
-    observers.forEach((observer) => observer(msg.options));
+    observers.forEach((observer) => {
+      try {
+        observer(msg.options);
+      } catch (e) {
+        console.error('Error while calling options observer', e);
+      }
+    });
   }
 
   return false;
