@@ -77,7 +77,12 @@ export async function observe(property, fn) {
   const wrapperFn = (options) => {
     if (value === undefined || options[property] !== value) {
       value = options[property];
-      fn(value);
+
+      try {
+        fn(value);
+      } catch (e) {
+        console.error('Error while calling options observer', e);
+      }
     }
   };
 
@@ -102,12 +107,8 @@ chrome.runtime.onMessage.addListener((msg) => {
       store.get(Options);
     }
 
-    observers.forEach((observer) => {
-      try {
-        observer(msg.options);
-      } catch (e) {
-        console.error('Error while calling options observer', e);
-      }
+    observers.forEach((fn) => {
+      fn(msg.options);
     });
   }
 
