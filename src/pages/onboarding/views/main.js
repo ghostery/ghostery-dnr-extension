@@ -7,11 +7,13 @@ import Whotracksme from './whotracksme.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 
-async function submit(host, event) {
+export async function submit(host, event) {
   event.preventDefault();
 
   await store.submit(host.form);
-  window.close();
+
+  const tab = await chrome.tabs.getCurrent();
+  chrome.tabs.remove([tab.id]);
 }
 
 export default define({

@@ -1,13 +1,7 @@
 import { define, html, store, router } from 'hybrids';
 
 import Form from '../store/form.js';
-
-async function submit(host, event) {
-  event.preventDefault();
-
-  await store.submit(host.form);
-  window.close();
-}
+import { submit } from './main.js';
 
 export default define({
   [router.connect]: { dialog: true },

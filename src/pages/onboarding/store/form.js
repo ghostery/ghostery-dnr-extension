@@ -13,6 +13,7 @@ export default {
           (all, rule) => ({ ...all, [rule]: values.protection }),
           {},
         ),
+        terms: values.terms,
         onboarding: true,
       });
 

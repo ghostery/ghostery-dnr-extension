@@ -26,6 +26,7 @@ const Options = {
   wtmSerpReport: true,
   version: '',
   onboarding: false,
+  terms: false,
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);

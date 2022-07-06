@@ -46,7 +46,7 @@ export default define({
   stats: store(Stats),
   render: ({ options, stats }) => html`
     ${store.ready(options) &&
-    (options.onboarding
+    (options.terms
       ? html`
           <h1>Privacy protection on this site</h1>
 
