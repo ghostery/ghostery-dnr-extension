@@ -45,21 +45,28 @@ export default define({
   options: store(Options),
   stats: store(Stats),
   render: ({ options, stats }) => html`
-    <h1>Privacy protection on this site</h1>
+    ${store.ready(options) &&
+    (options.onboarding
+      ? html`
+          <h1>Privacy protection on this site</h1>
 
-    <section class="toggles">
-      ${store.ready(options) &&
-      DNR_RULES_LIST.map(
-        (ruleset) =>
-          html`<ui-toggle-switch
-            name="${ruleset}"
-            label="${toggleLabels[ruleset]}"
-            disabled="${!options.dnrRules[ruleset]}"
-            onclick=${toggleRuleset(ruleset)}
-          ></ui-toggle-switch>`,
-      )}
-    </section>
-
+          <section class="toggles">
+            ${DNR_RULES_LIST.map(
+              (ruleset) =>
+                html`<ui-toggle-switch
+                  name="${ruleset}"
+                  label="${toggleLabels[ruleset]}"
+                  disabled="${!options.dnrRules[ruleset]}"
+                  onclick=${toggleRuleset(ruleset)}
+                ></ui-toggle-switch>`,
+            )}
+          </section>
+        `
+      : html`
+          <a href="/pages/onboarding/index.html" target="_blank">
+            TODO: Welcome to Ghostery
+          </a>
+        `)}
     ${store.ready(stats) &&
     html`
       <ui-stats categories="${stats.categories}"></ui-stats>

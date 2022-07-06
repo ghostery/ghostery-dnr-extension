@@ -19,12 +19,13 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
-    (all, rule) => ({ ...all, [rule]: true }),
+    (all, rule) => ({ ...all, [rule]: false }),
     {},
   ),
   trackerWheelDisabled: false,
   wtmSerpReport: true,
   version: '',
+  onboarding: false,
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
