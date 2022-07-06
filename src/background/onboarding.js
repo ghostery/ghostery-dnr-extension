@@ -16,7 +16,8 @@ import Options from '/store/options.js';
   const version = chrome.runtime.getManifest().version;
 
   if (!options.version) {
-    store.set(options, { version });
+    await store.set(options, { version });
+
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });

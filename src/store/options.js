@@ -36,10 +36,17 @@ const Options = {
       await chrome.storage.local.set({ options });
 
       // Send update message to another contexts (background page / panel / options)
-      await chrome.runtime.sendMessage({
-        action: UPDATE_OPTIONS_ACTION_NAME,
-        options,
-      });
+      try {
+        await chrome.runtime.sendMessage({
+          action: UPDATE_OPTIONS_ACTION_NAME,
+          options,
+        });
+      } catch (e) {
+        console.error(
+          `Error while sending update options to other contexts: `,
+          e,
+        );
+      }
 
       return options;
     },
