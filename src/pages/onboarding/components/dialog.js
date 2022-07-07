@@ -23,10 +23,12 @@ export default define({
       bottom: 0;
       --gh-onboarding-dialog-spacing: 20px;
       padding: var(--gh-onboarding-dialog-spacing);
+      z-index: 1000;
     }
 
     #dialog {
       display: flex;
+      flex-flow: column;
       position: relative;
       box-sizing: border-box;
       background: var(--ui-color-gray-700);
@@ -41,6 +43,7 @@ export default define({
       grid-auto-rows: min-content;
       gap: 16px;
       overflow-y: auto;
+      overscroll-behavior: contain;
       max-height: 100%;
       padding: var(--gh-onboarding-dialog-spacing) var(--gh-onboarding-dialog-spacing) calc(var(--gh-onboarding-dialog-spacing) + 80px);
     }
