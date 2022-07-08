@@ -36,6 +36,7 @@ export default define({
           We are dedicated to your privacy.
         </ui-text>
         <ui-text type="body-s">
+          <!-- Privacy Policy - paragraph 1/2 -->
           Transparency is the pillar upon which Ghostery is built. We tell you
           as often as we can what information we collect, why we collect it, and
           how we use that information. This is an ongoing, never-ending effort
@@ -43,6 +44,7 @@ export default define({
           simplicity requires constant review and communication.
         </ui-text>
         <ui-text type="body-s">
+          <!-- Privacy Policy - paragraph 1/2 -->
           We only collect personal data about you if you complete and submit a
           form where you provide that information and request something from us
           or create an account. For more information on what information we
@@ -51,9 +53,9 @@ export default define({
         </ui-text>
         <ui-text type="body-s">
           Contact us at
-          <a href="mailto:privacy@ghostery.com" translate="no">
+          ${html`<a href="mailto:privacy@ghostery.com" translate="no">
             privacy@ghostery.com
-          </a>
+          </a>`}
         </ui-text>
         <div>
           ${html.resolve(
