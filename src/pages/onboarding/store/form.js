@@ -6,15 +6,13 @@ export default {
   protection: false,
   terms: store.value(false, (val, _, { protection }) => val || !protection),
   [store.connect]: {
-    get: () => ({}),
-    set: async (id, values) => {
+    async set(id, values) {
       await store.set(Options, {
         dnrRules: DNR_RULES_LIST.reduce(
           (all, rule) => ({ ...all, [rule]: values.protection }),
           {},
         ),
         terms: values.terms,
-        onboarding: true,
       });
 
       return values;

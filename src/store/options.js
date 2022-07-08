@@ -25,7 +25,6 @@ const Options = {
   trackerWheelDisabled: false,
   wtmSerpReport: true,
   version: '',
-  onboarding: false,
   terms: false,
   [store.connect]: {
     async get() {
@@ -37,7 +36,7 @@ const Options = {
 
       // Send update message to another contexts (background page / panel / options)
       try {
-        await chrome.runtime.sendMessage({
+        chrome.runtime.sendMessage({
           action: UPDATE_OPTIONS_ACTION_NAME,
           options,
         });
