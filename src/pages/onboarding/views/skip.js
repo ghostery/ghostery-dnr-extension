@@ -3,6 +3,8 @@ import { define, html, store, router } from 'hybrids';
 import Form from '../store/form.js';
 import { submit } from './main.js';
 
+import OutroSkip from './outro-skip.js';
+
 export default define({
   [router.connect]: { dialog: true },
   tag: 'gh-onboarding-skip-dialog',
@@ -26,7 +28,7 @@ export default define({
           <a href="${router.backUrl()}">Back</a>
         </gh-onboarding-button>
         <gh-onboarding-button type="outline" slot="footer">
-          <button onclick="${submit}">Continue</button>
+          <a href="${router.url(OutroSkip)}" onclick="${submit}">Continue</a>
         </gh-onboarding-button>
       </gh-onboarding-dialog>
     `,

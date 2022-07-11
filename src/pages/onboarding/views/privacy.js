@@ -32,31 +32,6 @@ export default define({
         <ui-text slot="header" type="headline-m" color="white">
           Ghostery Privacy Policy
         </ui-text>
-        <ui-text type="label-m" color="white">
-          We are dedicated to your privacy.
-        </ui-text>
-        <ui-text type="body-s">
-          <!-- Privacy Policy - paragraph 1/2 -->
-          Transparency is the pillar upon which Ghostery is built. We tell you
-          as often as we can what information we collect, why we collect it, and
-          how we use that information. This is an ongoing, never-ending effort
-          and striking the right balance between comprehensiveness and
-          simplicity requires constant review and communication.
-        </ui-text>
-        <ui-text type="body-s">
-          <!-- Privacy Policy - paragraph 1/2 -->
-          We only collect personal data about you if you complete and submit a
-          form where you provide that information and request something from us
-          or create an account. For more information on what information we
-          collect and how we use it, read our privacy statements that can be
-          found below.
-        </ui-text>
-        <ui-text type="body-s">
-          Contact us at
-          ${html`<a href="mailto:privacy@ghostery.com" translate="no">
-            privacy@ghostery.com
-          </a>`}
-        </ui-text>
         <div>
           ${html.resolve(
             policy
@@ -70,7 +45,7 @@ export default define({
               )
               .catch(
                 () =>
-                  html`<ui-text type="body-s">Full text of the privacy policy is available at: <a href="${PRIVACY_POLICY_URL}" target="_blank">${PRIVACY_POLICY_URL}</a></div>`,
+                  html`<ui-text type="body-s">For more information read our full <a href="${PRIVACY_POLICY_URL}" target="_blank">privacy policy</a>.</div>`,
               ),
           )}
         </div>

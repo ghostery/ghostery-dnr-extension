@@ -21,7 +21,9 @@ export default define({
         </ui-text>
         <ui-text type="body-s">
           More information on
-          <a href="https://whotracks.me" target="_blank">WhoTracks.Me</a>
+          ${html`<a href="https://whotracks.me" target="_blank" translate="no"
+            >WhoTracks.Me</a
+          >`}.
         </ui-text>
 
         <gh-onboarding-button slot="footer">
