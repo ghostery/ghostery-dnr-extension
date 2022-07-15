@@ -58,9 +58,9 @@ async function send(protocol) {
   await updateSentAt();
 }
 
-observe('onboarding', async (onboarding) => {
+observe('terms', async (terms) => {
   try {
-    if (onboarding) {
+    if (terms) {
       const storage = new Storage(PUBLIC_KEYS_INDEXED_DB);
       await storage.init();
 
