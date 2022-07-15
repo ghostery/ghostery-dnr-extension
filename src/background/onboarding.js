@@ -11,7 +11,7 @@
 import { store } from 'hybrids';
 import Options from '/store/options.js';
 
-(async () => {
+(async function onboarding() {
   const options = await store.resolve(store.get(Options));
   const version = chrome.runtime.getManifest().version;
 
