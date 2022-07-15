@@ -46,27 +46,25 @@ export default define({
   stats: store(Stats),
   render: ({ options, stats }) => html`
     ${store.ready(options) &&
-    (options.terms
-      ? html`
-          <h1>Privacy protection on this site</h1>
-
-          <section class="toggles">
-            ${DNR_RULES_LIST.map(
-              (ruleset) =>
-                html`<ui-toggle-switch
-                  name="${ruleset}"
-                  label="${toggleLabels[ruleset]}"
-                  disabled="${!options.dnrRules[ruleset]}"
-                  onclick=${toggleRuleset(ruleset)}
-                ></ui-toggle-switch>`,
-            )}
-          </section>
-        `
-      : html`
-          <a href="/pages/onboarding/index.html" target="_blank">
-            TODO: Welcome to Ghostery
-          </a>
-        `)}
+    html`
+      <h1>Privacy protection on this site</h1>
+      <ui-onboarding-state
+        disabled="${!options.terms}"
+        href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
+      >
+        <section class="toggles">
+          ${DNR_RULES_LIST.map(
+            (ruleset) =>
+              html`<ui-toggle-switch
+                name="${ruleset}"
+                label="${toggleLabels[ruleset]}"
+                disabled="${!options.dnrRules[ruleset]}"
+                onclick=${toggleRuleset(ruleset)}
+              ></ui-toggle-switch>`,
+          )}
+        </section>
+      </ui-onboarding-state>
+    `}
     ${store.ready(stats) &&
     html`
       <ui-stats categories="${stats.categories}"></ui-stats>
@@ -101,7 +99,6 @@ export default define({
     }
     
     section.toggles {
-      margin: 10px 0;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 10px;

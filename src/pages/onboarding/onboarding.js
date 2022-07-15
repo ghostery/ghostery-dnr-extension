@@ -1,25 +1,18 @@
-import { define, html, router } from 'hybrids';
+import { define, html, store } from 'hybrids';
+import Options, { DNR_RULES_LIST } from '/store/options';
 
-import Main from './views/main.js';
-import OutroSkip from './views/outro-skip.js';
-import OutroSuccess from './views/outro-success.js';
+function updateOptions() {
+  store.set(Options, {
+    dnrRules: DNR_RULES_LIST.reduce(
+      (all, rule) => ({ ...all, [rule]: true }),
+      {},
+    ),
+    terms: true,
+  });
+}
 
 export default define({
   tag: 'gh-onboarding',
-  views: router([Main, OutroSuccess, OutroSkip]),
-  content: ({ views }) => html`
-    <gh-onboarding-layout>${views}</gh-onboarding-layout>
-  `.css`
-    html, body {
-      background: var(--ui-color-gray-800);
-    }
-
-    html, body, gh-onboarding, gh-onboarding-layout {
-      height: 100%;
-    }
-
-    gh-onboarding {
-      display: block;
-    }
-  `,
+  content: () =>
+    html`<ui-onboarding onsuccess="${updateOptions}"></ui-onboarding>`,
 });
