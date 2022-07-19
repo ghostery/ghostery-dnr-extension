@@ -47,11 +47,11 @@ export default define({
   render: ({ options, stats }) => html`
     ${store.ready(options) &&
     html`
-      <h1>Privacy protection on this site</h1>
       <ui-onboarding-state
         disabled="${!options.terms}"
         href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
       >
+        <h1>Privacy protection on this site</h1>
         <section class="toggles">
           ${DNR_RULES_LIST.map(
             (ruleset) =>

@@ -24,8 +24,8 @@ const Options = {
   ),
   trackerWheelDisabled: false,
   wtmSerpReport: true,
-  version: '',
   terms: false,
+  onboarding: { done: false, shownAt: 0 },
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);

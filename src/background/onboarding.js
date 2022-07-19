@@ -11,12 +11,17 @@
 import { store } from 'hybrids';
 import Options from '/store/options.js';
 
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
 (async function onboarding() {
   const options = await store.resolve(store.get(Options));
-  const version = chrome.runtime.getManifest().version;
+  const now = Date.now();
 
-  if (!options.version) {
-    await store.set(options, { version });
+  if (
+    !options.onboarding.done &&
+    options.onboarding.shownAt < now - DAY_IN_MS
+  ) {
+    await store.set(options, { onboarding: { shownAt: now } });
 
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
