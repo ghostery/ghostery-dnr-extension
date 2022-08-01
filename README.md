@@ -1,3 +1,6 @@
+This repository was moved to [Ghostery Browser Extension](https://github.com/ghostery/ghostery-extension) monorepo 
+---
+
 # Ghostery DNR Extension
 
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data.
